@@ -8,6 +8,8 @@ import ICTruck from './icTruck.svg';
 import ICBox from './icBox.svg';
 import ICCamera from './icCamera.svg';
 import ICKey from './icKey.svg';
+import ICPassenger from './icPassenger.svg';
+import ICLuggage from './icLuggage.svg';
 
 export {
   ICHomeActive,
@@ -20,4 +22,6 @@ export {
   ICCamera,
   ICKey,
   ICTruck,
+  ICLuggage,
+  ICPassenger,
 };

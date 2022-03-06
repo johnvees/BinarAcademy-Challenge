@@ -15,7 +15,7 @@ const TabItem = ({isFocused, onPress, onLongPress, label}) => {
   const Icon = () => {
     if (label === 'Home')
       return isFocused ? <ICHomeActive /> : <ICHomeInactive />;
-    if (label === 'CarList')
+    if (label === 'Car List')
       return isFocused ? <ICCarListActive /> : <ICCarListInactive />;
     if (label === 'Account')
       return isFocused ? <ICAccountActive /> : <ICAccountInactive />;
