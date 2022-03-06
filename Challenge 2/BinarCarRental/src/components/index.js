@@ -1,5 +1,8 @@
 import BottomTabNavigator from './BottomTabNavigator';
 import TabItem from './TabItem';
 import Header from './Header';
+import Banner from './Banner';
+import Button from './Button';
+import Feature from './Feature';
 
-export {BottomTabNavigator, TabItem, Header};
+export {BottomTabNavigator, TabItem, Header, Banner, Button, Feature};

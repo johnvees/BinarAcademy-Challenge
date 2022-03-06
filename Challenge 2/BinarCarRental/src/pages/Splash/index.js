@@ -8,7 +8,7 @@ const Splash = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
       navigation.replace('MainApp');
-    }, 2000);
+    }, 1);
   }, [navigation]);
 
   return (
