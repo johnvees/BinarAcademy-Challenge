@@ -4,13 +4,13 @@ import {colors} from '../../utils';
 import {CarBanner} from '../../assets';
 import Button from '../Button';
 
-const Banner = () => {
+const Banner = ({onPress}) => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <View style={styles.textContainer}>
           <Text style={styles.title}>Sewa Mobil Berkualitas di kawasanmu</Text>
-          <Button type="primary" title="Sewa Mobil" />
+          <Button type="primary" title="Sewa Mobil" onPress={onPress} />
           <View style={styles.imageContainer}>
             <Image source={CarBanner} />
           </View>

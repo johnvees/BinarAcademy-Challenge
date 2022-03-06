@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     backgroundColor:
       type === 'primary' ? colors.button.background : colors.icon.background,
     padding: type === 'primary' ? 10 : 20,
+    paddingHorizontal: type === 'primary' ? 16 : 20,
     maxWidth: type === 'primary' ? '40%' : '100%',
     borderRadius: 10,
   }),

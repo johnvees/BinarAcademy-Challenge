@@ -3,14 +3,18 @@ import React from 'react';
 import {Header, Banner, Feature, ListCar} from '../../components/';
 import {colors} from '../../utils';
 
-const Home = () => {
+const Home = ({navigation, onPress}) => {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={colors.card} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Header name="Yohanes Velly Sabattino" location="Surabaya" />
-        <Banner />
-        <Feature />
+        <Banner
+          onPress={() => navigation.replace('MainApp', {screen: 'Car List'})}
+        />
+        <Feature
+          onPress={() => navigation.replace('MainApp', {screen: 'Car List'})}
+        />
         <Text style={styles.title}>Daftar Mobil Pilihan</Text>
         <ListCar
           title="Mobil Bagus Sekali"
