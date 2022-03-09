@@ -1,8 +1,7 @@
 import {StyleSheet, Text, View, Dimensions, Image} from 'react-native';
 import * as React from 'react';
-import {colors} from '../../utils';
+import {colors, fonts} from '../../utils';
 import {Avatar} from '../../assets';
-import {fonts} from '../../utils/fonts';
 
 const Header = props => {
   return (

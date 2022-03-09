@@ -9,8 +9,7 @@ import {
   ICAccountActive,
   ICAccountInactive,
 } from '../../assets';
-import {colors} from '../../utils';
-import {fonts} from '../../utils/fonts';
+import {colors, fonts} from '../../utils';
 
 const TabItem = ({isFocused, onPress, onLongPress, label}) => {
   const Icon = () => {

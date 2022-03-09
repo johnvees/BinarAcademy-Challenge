@@ -1,8 +1,7 @@
 import {StyleSheet, Text, View, StatusBar, ScrollView} from 'react-native';
 import React from 'react';
 import {Header, Banner, Feature, ListCar} from '../../components/';
-import {colors} from '../../utils';
-import {fonts} from '../../utils/fonts';
+import {colors, fonts} from '../../utils';
 
 const Home = ({navigation, onPress}) => {
   return (

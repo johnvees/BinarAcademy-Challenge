@@ -2,8 +2,7 @@ import {StyleSheet, Text, View, Image, StatusBar} from 'react-native';
 import React, {useEffect} from 'react';
 
 import {CarImage} from '../../assets';
-import {colors} from '../../utils';
-import {fonts} from '../../utils/fonts';
+import {colors, fonts} from '../../utils';
 
 const Splash = ({navigation}) => {
   useEffect(() => {

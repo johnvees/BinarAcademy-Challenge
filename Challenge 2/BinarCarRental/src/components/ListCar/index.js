@@ -1,8 +1,7 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
-import {colors} from '../../utils';
+import {colors, fonts} from '../../utils';
 import {Car1, ICLuggage, ICPassenger} from '../../assets';
-import {fonts} from '../../utils/fonts';
 
 const index = ({title, passenger, luggage, price}) => {
   return (

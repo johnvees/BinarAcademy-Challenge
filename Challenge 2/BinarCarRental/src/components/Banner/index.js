@@ -1,9 +1,8 @@
 import {StyleSheet, Text, View, Dimensions, Image} from 'react-native';
 import React from 'react';
-import {colors} from '../../utils';
+import {colors, fonts} from '../../utils';
 import {CarBanner} from '../../assets';
 import Button from '../Button';
-import {fonts} from '../../utils/fonts';
 
 const Banner = ({onPress}) => {
   return (

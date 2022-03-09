@@ -1,9 +1,8 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
-import {colors} from '../../utils';
+import {colors, fonts} from '../../utils';
 import {Button} from '../../components';
 import {ILPark} from '../../assets';
-import {fonts} from '../../utils/fonts';
 
 const Account = ({navigation}) => {
   return (

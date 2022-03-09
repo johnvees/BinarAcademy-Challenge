@@ -1,8 +1,7 @@
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import React from 'react';
-import {colors} from '../../utils';
+import {colors, fonts} from '../../utils';
 import {ListCar} from '../../components';
-import {fonts} from '../../utils/fonts';
 
 const CarList = () => {
   return (

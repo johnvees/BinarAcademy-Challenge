@@ -2,8 +2,7 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 
 import IconOnly from './IconOnly';
-import {colors} from '../../utils';
-import {fonts} from '../../utils/fonts';
+import {colors, fonts} from '../../utils';
 
 const Button = ({type, title, onPress, icon}) => {
   if (type === 'icon-only') {
