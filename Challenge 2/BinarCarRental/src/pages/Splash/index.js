@@ -3,6 +3,7 @@ import React, {useEffect} from 'react';
 
 import {CarImage} from '../../assets';
 import {colors} from '../../utils';
+import {fonts} from '../../utils/fonts';
 
 const Splash = ({navigation}) => {
   useEffect(() => {
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     color: colors.text.secondary,
-    fontWeight: '700',
+    fontFamily: fonts.primary[700],
     textAlign: 'center',
   },
   imageContainer: {

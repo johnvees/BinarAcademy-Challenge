@@ -3,6 +3,7 @@ import React from 'react';
 
 import IconOnly from './IconOnly';
 import {colors} from '../../utils';
+import {fonts} from '../../utils/fonts';
 
 const Button = ({type, title, onPress, icon}) => {
   if (type === 'icon-only') {
@@ -36,9 +37,9 @@ const styles = StyleSheet.create({
   }),
   text: type => ({
     marginTop: type === 'primary' ? 0 : 8,
-    fontSize: 16,
+    fontSize: type === 'primary' ? 16 : 13,
     textAlign: 'center',
-    fontWeight: type === 'primary' ? '900' : '500',
+    fontFamily: type === 'primary' ? fonts.primary[700] : fonts.primary[300],
     color: type === 'primary' ? colors.text.secondary : colors.text.primary,
   }),
 });

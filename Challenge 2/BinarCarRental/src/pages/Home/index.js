@@ -2,6 +2,7 @@ import {StyleSheet, Text, View, StatusBar, ScrollView} from 'react-native';
 import React from 'react';
 import {Header, Banner, Feature, ListCar} from '../../components/';
 import {colors} from '../../utils';
+import {fonts} from '../../utils/fonts';
 
 const Home = ({navigation, onPress}) => {
   return (
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     paddingStart: 16,
     marginTop: 24,
     fontSize: 20,
-    fontWeight: '900',
+    fontFamily: fonts.primary[700],
     color: colors.text.primary,
   },
 });

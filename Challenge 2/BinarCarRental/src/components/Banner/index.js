@@ -3,6 +3,7 @@ import React from 'react';
 import {colors} from '../../utils';
 import {CarBanner} from '../../assets';
 import Button from '../Button';
+import {fonts} from '../../utils/fonts';
 
 const Banner = ({onPress}) => {
   return (
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     maxWidth: '70%',
     marginBottom: 24,
     fontSize: 20,
-    lineHeight: 28,
+    fontFamily: fonts.primary.normal,
     color: colors.text.secondary,
   },
   imageContainer: {

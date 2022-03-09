@@ -2,6 +2,7 @@ import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import React from 'react';
 import {colors} from '../../utils';
 import {ListCar} from '../../components';
+import {fonts} from '../../utils/fonts';
 
 const CarList = () => {
   return (
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     paddingStart: 16,
     marginTop: 24,
     fontSize: 20,
-    fontWeight: '900',
+    fontFamily: fonts.primary[700],
     color: colors.text.primary,
   },
 });

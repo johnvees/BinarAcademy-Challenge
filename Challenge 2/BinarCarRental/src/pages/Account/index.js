@@ -3,6 +3,7 @@ import React from 'react';
 import {colors} from '../../utils';
 import {Button} from '../../components';
 import {ILPark} from '../../assets';
+import {fonts} from '../../utils/fonts';
 
 const Account = ({navigation}) => {
   return (
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     paddingStart: 16,
     marginTop: 24,
     fontSize: 20,
-    fontWeight: '900',
+    fontFamily: fonts.primary[700],
     color: colors.text.primary,
   },
   content: {
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
   textContent: {
     marginVertical: 16,
     fontSize: 18,
-    fontWeight: '500',
+    fontFamily: fonts.primary.normal,
     color: colors.text.primary,
     textAlign: 'center',
   },

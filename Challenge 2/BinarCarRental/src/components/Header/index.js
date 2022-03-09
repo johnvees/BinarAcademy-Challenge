@@ -2,6 +2,7 @@ import {StyleSheet, Text, View, Dimensions, Image} from 'react-native';
 import * as React from 'react';
 import {colors} from '../../utils';
 import {Avatar} from '../../assets';
+import {fonts} from '../../utils/fonts';
 
 const Header = props => {
   return (
@@ -36,6 +37,7 @@ const styles = StyleSheet.create({
   content: {
     marginTop: 20,
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
   },
   avatar: {
@@ -43,15 +45,15 @@ const styles = StyleSheet.create({
     width: windowHeight * 0.08,
   },
   name: {
-    maxWidth: '100%',
+    maxWidth: '80%',
     fontSize: 20,
-    fontWeight: '300',
+    fontFamily: fonts.primary[300],
     color: colors.text.primary,
   },
   location: {
-    maxWidth: '100%',
+    maxWidth: '80%',
     fontSize: 22,
     color: colors.text.primary,
-    fontWeight: '900',
+    fontFamily: fonts.primary[700],
   },
 });

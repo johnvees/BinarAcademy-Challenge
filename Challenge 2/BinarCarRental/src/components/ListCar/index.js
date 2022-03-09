@@ -2,6 +2,7 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
 import {colors} from '../../utils';
 import {Car1, ICLuggage, ICPassenger} from '../../assets';
+import {fonts} from '../../utils/fonts';
 
 const index = ({title, passenger, luggage, price}) => {
   return (
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     fontSize: 18,
     color: colors.text.primary,
-    fontWeight: '500',
+    fontFamily: fonts.primary.normal,
   },
   information: {
     flexDirection: 'row',
@@ -81,12 +82,12 @@ const styles = StyleSheet.create({
   textInformation: {
     marginEnd: 8,
     fontSize: 12,
-    fontWeight: '300',
+    fontFamily: fonts.primary[300],
     color: colors.icon.text,
   },
   price: {
     fontSize: 18,
-    fontWeight: '500',
+    fontFamily: fonts.primary.normal,
     color: colors.text.tertiary,
   },
 });

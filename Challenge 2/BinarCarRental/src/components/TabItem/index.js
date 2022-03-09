@@ -10,6 +10,7 @@ import {
   ICAccountInactive,
 } from '../../assets';
 import {colors} from '../../utils';
+import {fonts} from '../../utils/fonts';
 
 const TabItem = ({isFocused, onPress, onLongPress, label}) => {
   const Icon = () => {
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
   },
   label: isFocused => ({
     marginTop: 4,
-    fontWeight: 'bold',
+    fontFamily: isFocused ? fonts.primary[700] : fonts.primary[300],
     fontSize: 12,
     color: isFocused ? colors.text.menuActive : colors.text.menuActive,
   }),
