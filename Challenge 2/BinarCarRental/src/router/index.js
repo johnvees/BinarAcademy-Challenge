@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import React from 'react';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -31,11 +31,6 @@ const MainApp = () => {
 const Router = () => {
   return (
     <Stack.Navigator initialRouteName="MainApp">
-      {/* <Stack.Screen
-        name="Splash"
-        component={Splash}
-        options={{headerShown: false}}
-      /> */}
       <Stack.Screen
         name="MainApp"
         component={MainApp}

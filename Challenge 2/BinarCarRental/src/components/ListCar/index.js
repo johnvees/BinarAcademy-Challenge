@@ -1,31 +1,39 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, FlatList} from 'react-native';
 import React from 'react';
 import {colors, fonts} from '../../utils';
 import {Car1, ICLuggage, ICPassenger} from '../../assets';
+import CarData from './Data';
 
-const index = ({title, passenger, luggage, price}) => {
+const index = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.content}>
-        <View style={styles.carlist}>
-          <Image style={styles.carImage} source={Car1} />
-          <View>
-            <Text style={styles.carType}>{title}</Text>
-            <View style={styles.information}>
-              <View style={styles.detailInformation}>
-                <ICPassenger style={styles.iconInformation} />
-                <Text style={styles.textInformation}>{passenger}</Text>
-              </View>
-              <View style={styles.detailInformation}>
-                <ICLuggage style={styles.iconInformation} />
-                <Text style={styles.textInformation}>{luggage}</Text>
+    <FlatList
+      showsVerticalScrollIndicator={false}
+      data={CarData}
+      keyExtractor={item => item.carId}
+      renderItem={({item}) => (
+        <View style={styles.container}>
+          <View style={styles.content}>
+            <View style={styles.carlist}>
+              <Image style={styles.carImage} source={Car1} />
+              <View>
+                <Text style={styles.carType}>{item.title}</Text>
+                <View style={styles.information}>
+                  <View style={styles.detailInformation}>
+                    <ICPassenger style={styles.iconInformation} />
+                    <Text style={styles.textInformation}>{item.passenger}</Text>
+                  </View>
+                  <View style={styles.detailInformation}>
+                    <ICLuggage style={styles.iconInformation} />
+                    <Text style={styles.textInformation}>{item.luggage}</Text>
+                  </View>
+                </View>
+                <Text style={styles.price}>{item.price}</Text>
               </View>
             </View>
-            <Text style={styles.price}>Rp {price}</Text>
           </View>
         </View>
-      </View>
-    </View>
+      )}
+    />
   );
 };
 
@@ -33,8 +41,10 @@ export default index;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     marginTop: 16,
     paddingHorizontal: 16,
+    marginBottom: 16,
   },
   content: {
     backgroundColor: colors.white,
