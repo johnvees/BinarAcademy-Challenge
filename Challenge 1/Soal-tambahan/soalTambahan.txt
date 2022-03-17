@@ -1,0 +1,10 @@
+buat satu function yang menerima 1 parameter, yang berfungsi untuk merubah string menjadi number
+
+example: 
+namaFunction("456") => 456
+namaFunction("4sq1") => "Error : params is not valid"
+
+
+
+rules:
+tidak boleh pakai parseInt/parse lainnya
