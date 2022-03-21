@@ -1,3 +1,4 @@
+import {LogBox} from 'react-native';
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 
@@ -20,3 +21,7 @@ const App = () => {
 export default App;
 
 const styles = StyleSheet.create({});
+
+LogBox.ignoreLogs([
+  "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
+]);
