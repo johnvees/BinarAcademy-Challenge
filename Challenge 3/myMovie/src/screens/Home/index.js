@@ -5,13 +5,14 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {ILAvatar} from '../../assets';
 import {colors} from '../../utils';
-import LatestMovies from '../../components/LatestMovie';
+import {LatestMovie, PopularMovie} from '../../components';
 
 const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Header name={'Yohanes Velly'} img={ILAvatar} />
-      <LatestMovies />
+      <LatestMovie />
+      <PopularMovie />
     </SafeAreaView>
   );
 };

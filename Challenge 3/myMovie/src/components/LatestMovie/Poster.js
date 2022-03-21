@@ -9,7 +9,7 @@ import {FlatList} from 'react-native-gesture-handler';
 const Poster = () => {
   const [movies, setMovies] = useState([]);
 
-  const getListMovieLatest = async () => {
+  const getLatestMovieList = async () => {
     try {
       setMovies('');
       const result = await axios.get(`${BASE_URL}`);
@@ -20,7 +20,7 @@ const Poster = () => {
   };
 
   useEffect(() => {
-    getListMovieLatest();
+    getLatestMovieList();
   }, []);
 
   const cardMovie = ({item}) => {
@@ -57,7 +57,7 @@ export default Poster;
 const styles = StyleSheet.create({
   poster: {
     width: moderateScale(120),
-    height: moderateScale(177),
+    height: moderateScale(180),
     borderRadius: moderateScale(10),
     marginRight: moderateScale(16),
     marginBottom: moderateScale(5),
