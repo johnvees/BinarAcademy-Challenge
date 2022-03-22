@@ -7,9 +7,11 @@ import {BASE_URL, colors, fonts} from '../../utils';
 import axios from 'axios';
 
 import {ICStar} from '../../assets';
+import { useNavigation } from '@react-navigation/native';
 
 const Poster = () => {
   const [movies, setMovies] = useState([]);
+  const navigation = useNavigation();
 
   const getPopularMovieList = async () => {
     try {
@@ -28,7 +30,12 @@ const Poster = () => {
   const cardMovie = ({item}) => {
     return (
       <View>
-        <TouchableOpacity onPress={() => null}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate('DetailsHeader', {
+              id: `${item.id}`,
+            })
+          }>
           <View style={styles.content}>
             <Image
               source={{uri: `${item.poster_path}`}}

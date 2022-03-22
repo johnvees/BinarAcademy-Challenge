@@ -11,14 +11,14 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import axios from 'axios';
 
 const DetailsHeader = ({navigation, route}) => {
-  const [details, setDetails] = useState([]);
+  const [movies, setMovies] = useState([]);
 
   const getMovieDetail = async () => {
     try {
-      setDetails('');
+      setMovies('');
       const result = await axios.get(`${BASE_URL}/${route.params.id}`);
-      setDetails(result.data);
-      console.log(result);
+      setMovies(result.data);
+      console.log(movies.genres);
     } catch (error) {
       console.log(error);
     }
@@ -28,29 +28,30 @@ const DetailsHeader = ({navigation, route}) => {
     getMovieDetail();
   }, []);
 
+  const isiDetail = ({item}) => {
+    return (
+      <View>
+        <Text>{item.credits}</Text>
+      </View>
+    );
+  };
+
   return (
     <SafeAreaView
       style={{
         backgroundColor: colors.backgroundScreen,
         padding: moderateScale(24),
       }}>
+      <Text>{movies.original_title}</Text>
       <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={details.genres}
+        showsVerticalScrollIndicator={false}
+        data={movies.genres}
         keyExtractor={(item, index) => index}
-        renderItem={({item}) => <Text>{item.name}, </Text>}
-      />
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={details.credits}
-        keyExtractor={(item, index) => index}
-        renderItem={({item}) => <Text>{item.cast[1]}, </Text>}
+        renderItem={({item}) => <Text>{item.name}</Text>}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
+          <TouchableOpacity>
             <Feather
               name="chevron-left"
               size={moderateScale(24)}
@@ -82,10 +83,7 @@ const DetailsHeader = ({navigation, route}) => {
             alignItems: 'center',
             marginBottom: moderateScale(24),
           }}>
-          <Image
-            source={{uri: `${details.poster_path}`}}
-            style={styles.moviePoster}
-          />
+          <Image source={ILPoster} style={styles.moviePoster} />
           <View
             style={{
               height: styles.moviePoster.height,
@@ -100,7 +98,7 @@ const DetailsHeader = ({navigation, route}) => {
               />
               <View style={{alignItems: 'center'}}>
                 <Text style={styles.status}>Status</Text>
-                <Text style={styles.detailStatus}>{details.status}</Text>
+                <Text style={styles.detailStatus}>18+</Text>
               </View>
             </View>
             <View style={styles.movieDetails}>
@@ -110,27 +108,29 @@ const DetailsHeader = ({navigation, route}) => {
                 color={colors.white}
               />
               <View style={{alignItems: 'center'}}>
-                <Text style={styles.status}>Runtime</Text>
-                <Text style={styles.detailStatus}>{details.runtime}</Text>
+                <Text style={styles.status}>Duration</Text>
+                <Text style={styles.detailStatus}>1h 27m</Text>
               </View>
             </View>
             <View style={styles.movieDetails}>
               <FontAwesome5
-                name="vote-yea"
+                name="heart"
                 size={moderateScale(18)}
                 color={colors.white}
               />
               <View style={{alignItems: 'center'}}>
                 <Text style={styles.status}>Vote Average</Text>
-                <Text style={styles.detailStatus}>{details.vote_average}</Text>
+                <Text style={styles.detailStatus}>70%</Text>
               </View>
             </View>
           </View>
         </View>
         <View>
-          <Text style={styles.movieTitle}>{details.original_title}</Text>
-          <Text style={styles.movieTagline}>{details.tagline}</Text>
-          <Text style={styles.movieDate}>{details.release_date}</Text>
+          <Text style={styles.movieTitle}>
+            Hotel Transylvania: Transformania
+          </Text>
+          <Text style={styles.movieTagline}>Change can be scary.</Text>
+          <Text style={styles.movieDate}>2022-02-25</Text>
         </View>
         <View
           style={{
@@ -141,7 +141,14 @@ const DetailsHeader = ({navigation, route}) => {
           }}></View>
         <View>
           <Text style={styles.movieTitle}>Synopsis</Text>
-          <Text style={styles.movieSynopsis}>{details.overview}</Text>
+          <Text style={styles.movieSynopsis}>
+            When Van Helsing's mysterious invention, the "Monsterfication Ray,"
+            goes haywire, Drac and his monster pals are all transformed into
+            humans, and Johnny becomes a monster. In their new mismatched
+            bodies, Drac and Johnny must team up and race across the globe to
+            find a cure before it's too late, and before they drive each other
+            crazy.
+          </Text>
         </View>
         <View
           style={{
@@ -150,33 +157,24 @@ const DetailsHeader = ({navigation, route}) => {
             borderColor: colors.text.secondary,
             marginBottom: moderateScale(16),
           }}></View>
-        <Text style={styles.movieTitle}>Top Billed Cast</Text>
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={details.genres}
-          keyExtractor={(item, index) => index}
-          renderItem={({item}) => (
-            <View>
-              <Image
-                source={{uri: `${details.credits}`}}
-                style={styles.castImage}
-              />
-              <Text
-                style={styles.castName}
-                ellipsizeMode="tail"
-                numberOfLines={1}>
-                {item.name}
-              </Text>
-              <Text
-                style={styles.castPeran}
-                ellipsizeMode="tail"
-                numberOfLines={1}>
-                Mavis Dracula Voice
-              </Text>
-            </View>
-          )}
-        />
+        <View>
+          <Text style={styles.movieTitle}>Top Billed Cast</Text>
+          <View>
+            <Image source={ILPoster} style={styles.castImage} />
+            <Text
+              style={styles.castName}
+              ellipsizeMode="tail"
+              numberOfLines={1}>
+              Selena Gomez
+            </Text>
+            <Text
+              style={styles.castPeran}
+              ellipsizeMode="tail"
+              numberOfLines={1}>
+              Mavis Dracula Voice
+            </Text>
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -232,7 +230,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(20),
     fontFamily: fonts.primary[700],
     color: colors.text.primary,
-    marginBottom: moderateScale(8),
+    marginBottom: moderateScale(5),
   },
   movieTagline: {
     fontSize: moderateScale(14),
@@ -250,13 +248,14 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(14),
     fontFamily: fonts.primary[400],
     color: colors.text.secondary,
-    marginBottom: moderateScale(8),
+    marginBottom: moderateScale(16),
     textAlign: 'justify',
   },
   castImage: {
     width: moderateScale(70),
     height: moderateScale(90),
     borderRadius: moderateScale(8),
+    marginBottom: moderateScale(8),
   },
   castName: {
     maxWidth: moderateScale(70),

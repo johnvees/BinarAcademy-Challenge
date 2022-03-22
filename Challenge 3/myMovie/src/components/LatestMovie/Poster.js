@@ -5,9 +5,11 @@ import {BASE_URL, colors, fonts} from '../../utils';
 import {moderateScale} from 'react-native-size-matters';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {FlatList} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
 
 const Poster = () => {
   const [movies, setMovies] = useState([]);
+  const navigation = useNavigation();
 
   const getLatestMovieList = async () => {
     try {
@@ -26,7 +28,12 @@ const Poster = () => {
   const cardMovie = ({item}) => {
     return (
       <View>
-        <TouchableOpacity onPress={() => null}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate('DetailsHeader', {
+              id: `${item.id}`,
+            })
+          }>
           <Image source={{uri: `${item.poster_path}`}} style={styles.poster} />
           <View style={{maxWidth: styles.poster.width}}>
             <Text style={styles.title} ellipsizeMode="tail" numberOfLines={1}>

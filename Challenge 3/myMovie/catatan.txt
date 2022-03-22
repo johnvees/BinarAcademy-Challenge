@@ -39,14 +39,9 @@ const DetailsHeader = ({navigation, route}) => {
         showsHorizontalScrollIndicator={false}
         data={details.genres}
         keyExtractor={(item, index) => index}
-        renderItem={({item}) => <Text>{item.name}, </Text>}
-      />
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={details.credits}
-        keyExtractor={(item, index) => index}
-        renderItem={({item}) => <Text>{item.cast[1]}, </Text>}
+        renderItem={({item}) => {
+          <Text>{item.name}</Text>;
+        }}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
@@ -154,9 +149,9 @@ const DetailsHeader = ({navigation, route}) => {
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
-          data={details.genres}
+          data={details}
           keyExtractor={(item, index) => index}
-          renderItem={({item}) => (
+          renderItem={({item}) => {
             <View>
               <Image
                 source={{uri: `${details.credits}`}}
@@ -166,7 +161,7 @@ const DetailsHeader = ({navigation, route}) => {
                 style={styles.castName}
                 ellipsizeMode="tail"
                 numberOfLines={1}>
-                {item.name}
+                {details.credits}
               </Text>
               <Text
                 style={styles.castPeran}
@@ -174,8 +169,8 @@ const DetailsHeader = ({navigation, route}) => {
                 numberOfLines={1}>
                 Mavis Dracula Voice
               </Text>
-            </View>
-          )}
+            </View>;
+          }}
         />
       </ScrollView>
     </SafeAreaView>
