@@ -30,7 +30,7 @@ const Register = ({navigation}) => {
       const results = await axios.post(`${fakeStoreAPI}/auth/login`, body);
 
       if (results.status === 201 || results.status === 200) {
-        navigation.replace('Home', {token: results.data.token});
+        navigation.replace('Home');
         console.log(results);
       }
     } catch (error) {
