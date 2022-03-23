@@ -5,15 +5,22 @@ import {BASE_URL, colors, fonts} from '../../utils';
 import {moderateScale} from 'react-native-size-matters';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {FlatList} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
+import Skeleton from '../Skeleton';
 
-const Poster = () => {
+const Poster = ({skel}) => {
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigation = useNavigation();
 
   const getLatestMovieList = async () => {
     try {
       setMovies('');
       const result = await axios.get(`${BASE_URL}`);
       setMovies(result.data.results);
+      if (loading) {
+        setLoading(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -26,7 +33,12 @@ const Poster = () => {
   const cardMovie = ({item}) => {
     return (
       <View>
-        <TouchableOpacity onPress={() => null}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate('DetailsHeader', {
+              id: `${item.id}`,
+            })
+          }>
           <Image source={{uri: `${item.poster_path}`}} style={styles.poster} />
           <View style={{maxWidth: styles.poster.width}}>
             <Text style={styles.title} ellipsizeMode="tail" numberOfLines={1}>
@@ -41,13 +53,17 @@ const Poster = () => {
 
   return (
     <SafeAreaView>
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={movies}
-        keyExtractor={(item, index) => index}
-        renderItem={cardMovie}
-      />
+      {loading ? (
+        <Skeleton skel={'home'} />
+      ) : (
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={movies}
+          keyExtractor={(item, index) => index}
+          renderItem={cardMovie}
+        />
+      )}
     </SafeAreaView>
   );
 };

@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, StatusBar} from 'react-native';
 import React from 'react';
 import Header from '../../components/Header';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -10,6 +10,10 @@ import {LatestMovie, PopularMovie} from '../../components';
 const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar
+        backgroundColor={colors.backgroundScreen}
+        barStyle="light-content"
+      />
       <Header name={'Yohanes Velly'} img={ILAvatar} />
       <LatestMovie />
       <PopularMovie />
