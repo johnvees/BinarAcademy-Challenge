@@ -6,9 +6,11 @@ import {moderateScale} from 'react-native-size-matters';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {FlatList} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
+import Skeleton from '../Skeleton';
 
-const Poster = () => {
+const Poster = ({skel}) => {
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
   const getLatestMovieList = async () => {
@@ -16,6 +18,9 @@ const Poster = () => {
       setMovies('');
       const result = await axios.get(`${BASE_URL}`);
       setMovies(result.data.results);
+      if (loading) {
+        setLoading(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -48,13 +53,17 @@ const Poster = () => {
 
   return (
     <SafeAreaView>
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={movies}
-        keyExtractor={(item, index) => index}
-        renderItem={cardMovie}
-      />
+      {loading ? (
+        <Skeleton skel={'home'} />
+      ) : (
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={movies}
+          keyExtractor={(item, index) => index}
+          renderItem={cardMovie}
+        />
+      )}
     </SafeAreaView>
   );
 };

@@ -13,13 +13,14 @@ import {
   fonts,
   ImageUrl,
 } from '../../utils';
-import {ILPoster} from '../../assets';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import axios from 'axios';
+import Skeleton from '../Skeleton';
 
-const DetailsHeader = ({navigation, route}) => {
+const DetailsHeader = ({navigation, route, skel}) => {
   const [details, setDetails] = useState([]);
   const [casting, setCasting] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getMovieDetail = async () => {
     try {
@@ -27,6 +28,9 @@ const DetailsHeader = ({navigation, route}) => {
       const result = await axios.get(`${BASE_URL}/${route.params.id}`);
       setDetails(result.data);
       console.log(result);
+      if (loading) {
+        setLoading(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -62,145 +66,151 @@ const DetailsHeader = ({navigation, route}) => {
         backgroundColor: colors.backgroundScreen,
         padding: moderateScale(24),
       }}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Feather
-              name="chevron-left"
-              size={moderateScale(24)}
-              color={colors.white}
-            />
-          </TouchableOpacity>
-          <Text style={styles.title}>Movie Detail</Text>
-          <View style={{flexDirection: 'row'}}>
-            <TouchableOpacity style={{marginEnd: moderateScale(16)}}>
+      {loading ? (
+        <Skeleton skel={'detail'} />
+      ) : (
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <Feather
-                name="heart"
+                name="chevron-left"
                 size={moderateScale(24)}
                 color={colors.white}
               />
             </TouchableOpacity>
-            <TouchableOpacity>
-              <Feather
-                name="share"
-                size={moderateScale(24)}
-                color={colors.white}
-              />
-            </TouchableOpacity>
+            <Text style={styles.title}>Movie Detail</Text>
+            <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity style={{marginEnd: moderateScale(16)}}>
+                <Feather
+                  name="heart"
+                  size={moderateScale(24)}
+                  color={colors.white}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Feather
+                  name="share"
+                  size={moderateScale(24)}
+                  color={colors.white}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: moderateScale(24),
-          }}>
-          <Image
-            source={{uri: `${details.poster_path}`}}
-            style={styles.moviePoster}
-          />
           <View
             style={{
-              height: styles.moviePoster.height,
-              flexDirection: 'column',
+              flexDirection: 'row',
               justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: moderateScale(24),
             }}>
-            <View style={styles.movieDetails}>
-              <FontAwesome5
-                name="exclamation-circle"
-                size={moderateScale(18)}
-                color={colors.white}
-              />
-              <View style={{alignItems: 'center'}}>
-                <Text style={styles.status}>Status</Text>
-                <Text style={styles.detailStatus}>{details.status}</Text>
+            <Image
+              source={{uri: `${details.poster_path}`}}
+              style={styles.moviePoster}
+            />
+            <View
+              style={{
+                height: styles.moviePoster.height,
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}>
+              <View style={styles.movieDetails}>
+                <FontAwesome5
+                  name="exclamation-circle"
+                  size={moderateScale(18)}
+                  color={colors.white}
+                />
+                <View style={{alignItems: 'center'}}>
+                  <Text style={styles.status}>Status</Text>
+                  <Text style={styles.detailStatus}>{details.status}</Text>
+                </View>
               </View>
-            </View>
-            <View style={styles.movieDetails}>
-              <FontAwesome5
-                name="clock"
-                size={moderateScale(18)}
-                color={colors.white}
-              />
-              <View style={{alignItems: 'center'}}>
-                <Text style={styles.status}>Runtime</Text>
-                <Text style={styles.detailStatus}>{details.runtime}</Text>
+              <View style={styles.movieDetails}>
+                <FontAwesome5
+                  name="clock"
+                  size={moderateScale(18)}
+                  color={colors.white}
+                />
+                <View style={{alignItems: 'center'}}>
+                  <Text style={styles.status}>Runtime</Text>
+                  <Text style={styles.detailStatus}>{details.runtime}</Text>
+                </View>
               </View>
-            </View>
-            <View style={styles.movieDetails}>
-              <FontAwesome5
-                name="vote-yea"
-                size={moderateScale(18)}
-                color={colors.white}
-              />
-              <View style={{alignItems: 'center'}}>
-                <Text style={styles.status}>Vote Average</Text>
-                <Text style={styles.detailStatus}>{details.vote_average}</Text>
+              <View style={styles.movieDetails}>
+                <FontAwesome5
+                  name="vote-yea"
+                  size={moderateScale(18)}
+                  color={colors.white}
+                />
+                <View style={{alignItems: 'center'}}>
+                  <Text style={styles.status}>Vote Average</Text>
+                  <Text style={styles.detailStatus}>
+                    {details.vote_average}
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
-        </View>
-        <View>
-          <Text style={styles.movieTitle}>{details.original_title}</Text>
+          <View>
+            <Text style={styles.movieTitle}>{details.original_title}</Text>
+            <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              data={details.genres}
+              keyExtractor={(item, index) => index}
+              renderItem={({item}) => (
+                <Text style={styles.movieTagline}>{item.name} | </Text>
+              )}
+            />
+            <Text style={styles.movieTagline}>{details.tagline}</Text>
+            <Text style={styles.movieDate}>{details.release_date}</Text>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              borderWidth: moderateScale(0.5),
+              borderColor: colors.text.secondary,
+              marginBottom: moderateScale(16),
+            }}></View>
+          <View>
+            <Text style={styles.movieTitle}>Synopsis</Text>
+            <Text style={styles.movieSynopsis}>{details.overview}</Text>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              borderWidth: moderateScale(0.5),
+              borderColor: colors.text.secondary,
+              marginBottom: moderateScale(16),
+            }}></View>
+          <Text style={styles.movieTitle}>Cast</Text>
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
-            data={details.genres}
+            data={casting.cast}
             keyExtractor={(item, index) => index}
             renderItem={({item}) => (
-              <Text style={styles.movieTagline}>{item.name} | </Text>
+              <View>
+                <Image
+                  source={{uri: `${ImageUrl}${item.profile_path}`}}
+                  style={styles.castImage}
+                />
+                <Text
+                  style={styles.castName}
+                  ellipsizeMode="tail"
+                  numberOfLines={1}>
+                  {item.name}
+                </Text>
+                <Text
+                  style={styles.castPeran}
+                  ellipsizeMode="tail"
+                  numberOfLines={1}>
+                  {item.character}
+                </Text>
+              </View>
             )}
           />
-          <Text style={styles.movieTagline}>{details.tagline}</Text>
-          <Text style={styles.movieDate}>{details.release_date}</Text>
-        </View>
-        <View
-          style={{
-            flex: 1,
-            borderWidth: moderateScale(0.5),
-            borderColor: colors.text.secondary,
-            marginBottom: moderateScale(16),
-          }}></View>
-        <View>
-          <Text style={styles.movieTitle}>Synopsis</Text>
-          <Text style={styles.movieSynopsis}>{details.overview}</Text>
-        </View>
-        <View
-          style={{
-            flex: 1,
-            borderWidth: moderateScale(0.5),
-            borderColor: colors.text.secondary,
-            marginBottom: moderateScale(16),
-          }}></View>
-        <Text style={styles.movieTitle}>Cast</Text>
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={casting.cast}
-          keyExtractor={(item, index) => index}
-          renderItem={({item}) => (
-            <View>
-              <Image
-                source={{uri: `${ImageUrl}${item.profile_path}`}}
-                style={styles.castImage}
-              />
-              <Text
-                style={styles.castName}
-                ellipsizeMode="tail"
-                numberOfLines={1}>
-                {item.name}
-              </Text>
-              <Text
-                style={styles.castPeran}
-                ellipsizeMode="tail"
-                numberOfLines={1}>
-                {item.character}
-              </Text>
-            </View>
-          )}
-        />
-      </ScrollView>
+        </ScrollView>
+      )}
     </SafeAreaView>
   );
 };

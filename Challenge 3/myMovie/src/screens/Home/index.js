@@ -5,7 +5,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {ILAvatar} from '../../assets';
 import {colors} from '../../utils';
-import {LatestMovie, PopularMovie, Skeleton} from '../../components';
+import {LatestMovie, PopularMovie} from '../../components';
 
 const Home = () => {
   return (
@@ -14,7 +14,6 @@ const Home = () => {
         backgroundColor={colors.backgroundScreen}
         barStyle="light-content"
       />
-      <Skeleton />
       <Header name={'Yohanes Velly'} img={ILAvatar} />
       <LatestMovie />
       <PopularMovie />
