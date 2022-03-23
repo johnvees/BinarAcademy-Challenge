@@ -5,13 +5,21 @@ import {FlatList, ScrollView} from 'react-native-gesture-handler';
 
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {BASE_URL, colors, fonts} from '../../utils';
+import {
+  ACCESS_TOKEN,
+  BASE_URL,
+  colors,
+  credits,
+  fonts,
+  ImageUrl,
+} from '../../utils';
 import {ILPoster} from '../../assets';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import axios from 'axios';
 
 const DetailsHeader = ({navigation, route}) => {
   const [details, setDetails] = useState([]);
+  const [casting, setCasting] = useState([]);
 
   const getMovieDetail = async () => {
     try {
@@ -24,8 +32,28 @@ const DetailsHeader = ({navigation, route}) => {
     }
   };
 
+  const getCastDetail = async () => {
+    try {
+      setCasting('');
+      const resultCast = await axios.get(
+        `${credits}/${route.params.id}/credits`,
+        {
+          headers: {Authorization: `Bearer ${ACCESS_TOKEN}`},
+        },
+      );
+      setCasting(resultCast.data);
+      console.log(resultCast);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getMovieDetail();
+  }, []);
+
+  useEffect(() => {
+    getCastDetail();
   }, []);
 
   return (
@@ -34,20 +62,6 @@ const DetailsHeader = ({navigation, route}) => {
         backgroundColor: colors.backgroundScreen,
         padding: moderateScale(24),
       }}>
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={details.genres}
-        keyExtractor={(item, index) => index}
-        renderItem={({item}) => <Text>{item.name}, </Text>}
-      />
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={details.credits}
-        keyExtractor={(item, index) => index}
-        renderItem={({item}) => <Text>{item.cast[1]}, </Text>}
-      />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -129,6 +143,15 @@ const DetailsHeader = ({navigation, route}) => {
         </View>
         <View>
           <Text style={styles.movieTitle}>{details.original_title}</Text>
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={details.genres}
+            keyExtractor={(item, index) => index}
+            renderItem={({item}) => (
+              <Text style={styles.movieTagline}>{item.name} | </Text>
+            )}
+          />
           <Text style={styles.movieTagline}>{details.tagline}</Text>
           <Text style={styles.movieDate}>{details.release_date}</Text>
         </View>
@@ -150,16 +173,16 @@ const DetailsHeader = ({navigation, route}) => {
             borderColor: colors.text.secondary,
             marginBottom: moderateScale(16),
           }}></View>
-        <Text style={styles.movieTitle}>Top Billed Cast</Text>
+        <Text style={styles.movieTitle}>Cast</Text>
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
-          data={details.genres}
+          data={casting.cast}
           keyExtractor={(item, index) => index}
           renderItem={({item}) => (
             <View>
               <Image
-                source={{uri: `${details.credits}`}}
+                source={{uri: `${ImageUrl}${item.profile_path}`}}
                 style={styles.castImage}
               />
               <Text
@@ -172,7 +195,7 @@ const DetailsHeader = ({navigation, route}) => {
                 style={styles.castPeran}
                 ellipsizeMode="tail"
                 numberOfLines={1}>
-                Mavis Dracula Voice
+                {item.character}
               </Text>
             </View>
           )}
@@ -257,6 +280,7 @@ const styles = StyleSheet.create({
     width: moderateScale(70),
     height: moderateScale(90),
     borderRadius: moderateScale(8),
+    marginEnd: moderateScale(16),
   },
   castName: {
     maxWidth: moderateScale(70),
@@ -270,6 +294,6 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(12),
     fontFamily: fonts.primary[400],
     color: colors.text.secondary,
-    marginBottom: moderateScale(8),
+    marginBottom: moderateScale(16),
   },
 });

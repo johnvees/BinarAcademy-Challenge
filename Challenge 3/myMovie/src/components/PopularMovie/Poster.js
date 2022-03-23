@@ -7,7 +7,8 @@ import {BASE_URL, colors, fonts} from '../../utils';
 import axios from 'axios';
 
 import {ICStar} from '../../assets';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import Button from '../Button';
 
 const Poster = () => {
   const [movies, setMovies] = useState([]);
@@ -30,27 +31,21 @@ const Poster = () => {
   const cardMovie = ({item}) => {
     return (
       <View>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate('DetailsHeader', {
-              id: `${item.id}`,
-            })
-          }>
-          <View style={styles.content}>
-            <Image
-              source={{uri: `${item.poster_path}`}}
-              style={styles.poster}
-            />
-            <View
-              style={{
-                maxWidth: styles.poster.width,
-                paddingVertical: moderateScale(8),
-              }}>
+        <View style={styles.content}>
+          <Image source={{uri: `${item.poster_path}`}} style={styles.poster} />
+          <View
+            style={{
+              flex: 1,
+              height: styles.poster.height,
+              paddingVertical: moderateScale(8),
+              justifyContent: 'space-between',
+            }}>
+            <View>
               <Text style={styles.title} ellipsizeMode="tail" numberOfLines={1}>
                 {item.original_title}
               </Text>
               <Text style={styles.desc}>{item.release_date}</Text>
-              <Text style={styles.desc}>{item.genre_ids}</Text>
+              <Text style={styles.desc}>{item.genre_ids} ini genre</Text>
               <View
                 style={{
                   flexDirection: 'row',
@@ -66,8 +61,15 @@ const Poster = () => {
                 />
               </View>
             </View>
+            <Button
+              onPress={() =>
+                navigation.navigate('DetailsHeader', {
+                  id: `${item.id}`,
+                })
+              }
+            />
           </View>
-        </TouchableOpacity>
+        </View>
       </View>
     );
   };

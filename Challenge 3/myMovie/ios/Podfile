@@ -18,6 +18,8 @@ target 'myMovie' do
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
   target 'myMovieTests' do
     inherit! :complete
     # Pods for testing
