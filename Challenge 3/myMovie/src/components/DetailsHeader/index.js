@@ -102,7 +102,7 @@ const DetailsHeader = ({navigation, route, skel}) => {
               </TouchableOpacity>
               <TouchableOpacity onPress={customShare}>
                 <Feather
-                  name="share"
+                  name="share-2"
                   size={moderateScale(24)}
                   color={colors.white}
                 />
