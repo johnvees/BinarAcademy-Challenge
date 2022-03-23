@@ -16,6 +16,7 @@ import {
 import {SafeAreaView} from 'react-native-safe-area-context';
 import axios from 'axios';
 import Skeleton from '../Skeleton';
+import Share from 'react-native-share';
 
 const DetailsHeader = ({navigation, route, skel}) => {
   const [details, setDetails] = useState([]);
@@ -60,6 +61,18 @@ const DetailsHeader = ({navigation, route, skel}) => {
     getCastDetail();
   }, []);
 
+  const customShare = async () => {
+    const shareOptions = {
+      message: 'This is a test share massage',
+    };
+
+    try {
+      const ShareResponse = await Share.open(shareOptions);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <SafeAreaView
       style={{
@@ -87,7 +100,7 @@ const DetailsHeader = ({navigation, route, skel}) => {
                   color={colors.white}
                 />
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={customShare}>
                 <Feather
                   name="share"
                   size={moderateScale(24)}
