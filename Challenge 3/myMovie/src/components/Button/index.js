@@ -3,10 +3,10 @@ import React from 'react';
 import {colors, fonts} from '../../utils';
 import {moderateScale} from 'react-native-size-matters';
 
-const Button = ({onPress}) => {
+const Button = ({onPress, title}) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.button}>
-      <Text style={styles.buttonText}>Details</Text>
+      <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
   );
 };

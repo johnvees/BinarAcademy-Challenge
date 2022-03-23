@@ -152,6 +152,7 @@ const DetailsHeader = ({navigation, route, skel}) => {
           </View>
           <View>
             <Text style={styles.movieTitle}>{details.original_title}</Text>
+            <Text style={styles.movieTagline}>{details.tagline}</Text>
             <FlatList
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -161,7 +162,6 @@ const DetailsHeader = ({navigation, route, skel}) => {
                 <Text style={styles.movieTagline}>{item.name} | </Text>
               )}
             />
-            <Text style={styles.movieTagline}>{details.tagline}</Text>
             <Text style={styles.movieDate}>{details.release_date}</Text>
           </View>
           <View

@@ -28,7 +28,7 @@ const Poster = () => {
     getPopularMovieList();
   }, []);
 
-  const cardMovie = ({item}) => {
+  const cardMovie = ({item, title}) => {
     return (
       <View>
         <View style={styles.content}>
@@ -45,7 +45,7 @@ const Poster = () => {
                 {item.original_title}
               </Text>
               <Text style={styles.desc}>{item.release_date}</Text>
-              <Text style={styles.desc}>{item.genre_ids} ini genre</Text>
+              <Text style={styles.desc}>genre_id:{item.genre_ids}</Text>
               <View
                 style={{
                   flexDirection: 'row',
@@ -61,7 +61,7 @@ const Poster = () => {
                 />
               </View>
             </View>
-            <Button
+            <Button title={'Details'}
               onPress={() =>
                 navigation.navigate('DetailsHeader', {
                   id: `${item.id}`,
