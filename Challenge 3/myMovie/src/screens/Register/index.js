@@ -51,8 +51,6 @@ const Register = ({navigation}) => {
       // console.log(resultRegexPass);
       // console.log(resultRegexEmail);
 
-      const results = await axios.post(`${fakeStoreAPI}/users`, body);
-
       if (email === '') {
         Alert.alert('Gagal', 'Email belum diisi');
       } else if (resultRegexEmail === false) {
@@ -61,7 +59,7 @@ const Register = ({navigation}) => {
         Alert.alert('Gagal', 'Username belum diisi');
       } else if (password === '') {
         Alert.alert('Gagal', 'Password belum diisi');
-      } else if (regexPass === false) {
+      } else if (resultRegexPass === false) {
         Alert.alert('Gagal', 'Format Password Tidak Sesuai');
       } else if (firstname === '') {
         Alert.alert('Gagal', 'First Name belum diisi');
@@ -69,7 +67,12 @@ const Register = ({navigation}) => {
         Alert.alert('Gagal', 'Last Name belum diisi');
       } else if (phone === '') {
         Alert.alert('Gagal', 'Nomor Telepon belum diisi');
-      } else if (results.status === 201 || results.status === 200) {
+      } 
+      // kasih handler biar nggak lanjut lagi
+
+      const results = await axios.post(`${fakeStoreAPI}/users`, body);
+
+      if (results.status === 201 || results.status === 200) {
         navigation.replace('Login');
         console.log(results);
       }
