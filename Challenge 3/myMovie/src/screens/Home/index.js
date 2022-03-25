@@ -4,65 +4,65 @@ import Header from '../../components/Header';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {ILAvatar} from '../../assets';
-import {colors, checkConnected} from '../../utils';
+import {colors} from '../../utils';
 import {LatestMovie, PopularMovie, NoConnection} from '../../components';
 import NetInfo from '@react-native-community/netinfo';
 
-// class StatusHome extends Component {
-//   NetInfoSubscribtion = null;
+class StatusHome extends Component {
+  NetInfoSubscribtion = null;
 
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       connection_status: false,
-//     };
-//   }
+  constructor(props) {
+    super(props);
+    this.state = {
+      connection_status: false,
+    };
+  }
 
-//   componentDidMount() {
-//     this.NetInfoSubscribtion = NetInfo.addEventListener(
-//       this._handleConnectivityChange,
-//     );
-//   }
+  componentDidMount() {
+    this.NetInfoSubscribtion = NetInfo.addEventListener(
+      this._handleConnectivityChange,
+    );
+  }
 
-//   componenWillUnmount() {
-//     this.NetInfoSubscribtion && this.NetInfoSubscribtion();
-//   }
+  componenWillUnmount() {
+    this.NetInfoSubscribtion && this.NetInfoSubscribtion();
+  }
 
-//   _handleConnectivityChange = state => {
-//     this.setState({connection_status: state.isConnected});
-//   };
+  _handleConnectivityChange = state => {
+    this.setState({connection_status: state.isConnected});
+  };
 
-//   render() {
-//     return (
-//       <SafeAreaView>
-//         <Text>
-//           Connection Status :{' '}
-//           {this.state.connection_status ? 'Connected' : 'Disconnected'}
-//         </Text>
-//       </SafeAreaView>
-//     );
-//   }
-// }
+  render() {
+    return (
+      <SafeAreaView>
+        {this.state.connection_status ? (
+          <Text>Connected To Internet</Text>
+        ) : (
+          <Text>No Internet Connection</Text>
+        )}
+      </SafeAreaView>
+    );
+  }
+}
 
 const Home = () => {
-  const [connectStatus, setConnectStatus] = useState(false);
-  checkConnected().then(res => {
-    setConnectStatus(res);
-  });
+  // const [connectStatus, setConnectStatus] = useState(false);
+  // checkConnected().then(res => {
+  //   setConnectStatus(res);
+  // });
 
-  return connectStatus ? (
+  return (
     <SafeAreaView style={styles.container}>
       <StatusBar
         backgroundColor={colors.backgroundScreen}
         barStyle="light-content"
       />
-      {/* <StatusHome /> */}
+      <StatusHome />
+
       <Header name={'Yohanes Velly'} img={ILAvatar} />
       <LatestMovie />
       <PopularMovie />
     </SafeAreaView>
-  ) : (
-    <NoConnection onCheck={checkConnected} />
   );
 };
 
