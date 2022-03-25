@@ -1,5 +1,12 @@
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  RefreshControl,
+} from 'react-native';
+import React, {useState, useEffect, useCallback} from 'react';
 import axios from 'axios';
 import {BASE_URL, colors, fonts} from '../../utils';
 import {moderateScale} from 'react-native-size-matters';
@@ -8,10 +15,20 @@ import {FlatList} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 import Skeleton from '../Skeleton';
 
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
+
 const Poster = ({skel}) => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const navigation = useNavigation();
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(1000).then(() => setRefreshing(false));
+  });
 
   const getLatestMovieList = async () => {
     try {
@@ -57,6 +74,9 @@ const Poster = ({skel}) => {
         <Skeleton skel={'home'} />
       ) : (
         <FlatList
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
           horizontal
           showsHorizontalScrollIndicator={false}
           data={movies}

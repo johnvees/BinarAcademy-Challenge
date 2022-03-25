@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, RefreshControl} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {FlatList} from 'react-native-gesture-handler';
@@ -10,9 +10,19 @@ import {ICStar} from '../../assets';
 import {useNavigation} from '@react-navigation/native';
 import Button from '../Button';
 
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
+
 const Poster = () => {
   const [movies, setMovies] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
   const navigation = useNavigation();
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(1000).then(() => setRefreshing(false));
+  });
 
   const getPopularMovieList = async () => {
     try {
@@ -61,7 +71,8 @@ const Poster = () => {
                 />
               </View>
             </View>
-            <Button title={'Details'}
+            <Button
+              title={'Details'}
               onPress={() =>
                 navigation.navigate('DetailsHeader', {
                   id: `${item.id}`,
@@ -77,6 +88,9 @@ const Poster = () => {
   return (
     <SafeAreaView>
       <FlatList
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         showsVerticalScrollIndicator={false}
         data={movies}
         keyExtractor={(item, index) => index}

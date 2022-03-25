@@ -1,4 +1,11 @@
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  RefreshControl,
+} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {moderateScale} from 'react-native-size-matters';
 import {FlatList, ScrollView} from 'react-native-gesture-handler';
@@ -18,10 +25,20 @@ import axios from 'axios';
 import Skeleton from '../Skeleton';
 import Share from 'react-native-share';
 
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
+
 const DetailsHeader = ({navigation, route, skel}) => {
   const [details, setDetails] = useState([]);
   const [casting, setCasting] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(1000).then(() => setRefreshing(false));
+  });
 
   const getMovieDetail = async () => {
     try {
@@ -82,7 +99,11 @@ const DetailsHeader = ({navigation, route, skel}) => {
       {loading ? (
         <Skeleton skel={'detail'} />
       ) : (
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }>
           <View style={styles.header}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Feather
