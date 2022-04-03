@@ -14,6 +14,7 @@ const Login = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Gap height={16} />
       <Image source={ILLogo} style={styles.logo} />
       <Text style={styles.title}>Hi! Nice To See You</Text>
       <Text style={styles.titleDesc}>Create Your Account Below!</Text>
@@ -53,7 +54,7 @@ const Login = ({navigation}) => {
           justifyContent: 'flex-end',
         }}>
         <Button
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => navigation.navigate('Successful')}
           type={'textOnly'}
           secondaryTitle={`Already Have an Account?`}
           primaryTitle={' Login Here'}
@@ -73,7 +74,6 @@ const styles = StyleSheet.create({
     padding: ms(24),
   },
   logo: {
-    marginTop: ms(16),
     marginBottom: ms(32),
     height: ms(80),
     resizeMode: 'contain',
