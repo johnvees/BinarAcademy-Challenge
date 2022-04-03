@@ -69,6 +69,10 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>Gilroy-Bold.otf</string>
+		<string>Gilroy-Semibold.otf</string>
+		<string>sfprodisplay_medium.ttf</string>
+		<string>sfprodisplay_regular.ttf</string>
 	</array>
 </dict>
 </plist>

@@ -30,6 +30,10 @@
 		3EBCF86B8C80467A9354A2E8 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE9EB09A9A344D7193EF9A93 /* Octicons.ttf */; };
 		54BE4C4509124169ABA37393 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC438850445941AC810F7CAF /* SimpleLineIcons.ttf */; };
 		5949D70315AB48069BB3DE19 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B40C7CF523C4BD3B9B12ACF /* Zocial.ttf */; };
+		86AED1EB65DF4DBEB10A410E /* Gilroy-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2669F88AB0F14E4A91CEC58B /* Gilroy-Bold.otf */; };
+		1570D42BBF564991877A8E5F /* Gilroy-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9311C68FD72E4AE0A7C700FB /* Gilroy-Semibold.otf */; };
+		9D5ADE250BFC4D4ABFC25F74 /* sfprodisplay_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 136CF5C7AB8749B18A99A2E1 /* sfprodisplay_medium.ttf */; };
+		F5E2BA53904E46978430F0C7 /* sfprodisplay_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0643A7F08DAB44959CF9DD04 /* sfprodisplay_regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +80,10 @@
 		AE9EB09A9A344D7193EF9A93 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		BC438850445941AC810F7CAF /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		5B40C7CF523C4BD3B9B12ACF /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2669F88AB0F14E4A91CEC58B /* Gilroy-Bold.otf */ = {isa = PBXFileReference; name = "Gilroy-Bold.otf"; path = "../src/utils/fonts/Gilroy-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9311C68FD72E4AE0A7C700FB /* Gilroy-Semibold.otf */ = {isa = PBXFileReference; name = "Gilroy-Semibold.otf"; path = "../src/utils/fonts/Gilroy-Semibold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		136CF5C7AB8749B18A99A2E1 /* sfprodisplay_medium.ttf */ = {isa = PBXFileReference; name = "sfprodisplay_medium.ttf"; path = "../src/utils/fonts/sfprodisplay_medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0643A7F08DAB44959CF9DD04 /* sfprodisplay_regular.ttf */ = {isa = PBXFileReference; name = "sfprodisplay_regular.ttf"; path = "../src/utils/fonts/sfprodisplay_regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +208,10 @@
 				AE9EB09A9A344D7193EF9A93 /* Octicons.ttf */,
 				BC438850445941AC810F7CAF /* SimpleLineIcons.ttf */,
 				5B40C7CF523C4BD3B9B12ACF /* Zocial.ttf */,
+				2669F88AB0F14E4A91CEC58B /* Gilroy-Bold.otf */,
+				9311C68FD72E4AE0A7C700FB /* Gilroy-Semibold.otf */,
+				136CF5C7AB8749B18A99A2E1 /* sfprodisplay_medium.ttf */,
+				0643A7F08DAB44959CF9DD04 /* sfprodisplay_regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -317,6 +329,10 @@
 				3EBCF86B8C80467A9354A2E8 /* Octicons.ttf in Resources */,
 				54BE4C4509124169ABA37393 /* SimpleLineIcons.ttf in Resources */,
 				5949D70315AB48069BB3DE19 /* Zocial.ttf in Resources */,
+				86AED1EB65DF4DBEB10A410E /* Gilroy-Bold.otf in Resources */,
+				1570D42BBF564991877A8E5F /* Gilroy-Semibold.otf in Resources */,
+				9D5ADE250BFC4D4ABFC25F74 /* sfprodisplay_medium.ttf in Resources */,
+				F5E2BA53904E46978430F0C7 /* sfprodisplay_regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
