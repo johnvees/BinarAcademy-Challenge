@@ -9,9 +9,9 @@ export default function Routes() {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Successful" component={Successful} />
       <Stack.Screen name="Register" component={Register} />
-      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Detail" component={Detail} />
     </Stack.Navigator>
   );

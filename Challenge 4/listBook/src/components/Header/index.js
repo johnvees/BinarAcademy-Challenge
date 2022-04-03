@@ -1,14 +1,69 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
+import Feather from 'react-native-vector-icons/Feather';
+import {ms} from 'react-native-size-matters';
+import {useNavigation} from '@react-navigation/native';
 
-const Header = () => {
-  return (
-    <View>
-      <Text>Header</Text>
-    </View>
-  );
+import {colors, fonts} from '../../utils';
+import {Gap} from '../../components';
+
+const Header = ({type, title}) => {
+  const navigation = useNavigation();
+
+  if (type === 'home') {
+    return (
+      <View>
+        <Text style={styles.homeTitle}>{title}</Text>
+        <Text style={styles.homeDesc}>Search based on your needs</Text>
+      </View>
+    );
+  } else if (type === 'detail') {
+    return (
+      <View style={styles.detailContent}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Feather
+            name="chevron-left"
+            size={ms(24)}
+            color={colors.text.primary}
+          />
+        </TouchableOpacity>
+        <Text style={styles.detailTitle}>{title}</Text>
+        <View style={{flexDirection: 'row'}}>
+          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <Feather name="heart" size={ms(24)} color={colors.text.primary} />
+          </TouchableOpacity>
+          <Gap width={ms(16)} />
+          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <Feather name="share-2" size={ms(24)} color={colors.text.primary} />
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
 };
 
 export default Header;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  homeTitle: {
+    fontSize: ms(24),
+    fontFamily: fonts.secondary[700],
+    color: colors.text.primary,
+    marginBottom: ms(8),
+  },
+  homeDesc: {
+    fontSize: ms(16),
+    fontFamily: fonts.primary[400],
+    color: colors.text.secondary,
+  },
+  detailContent: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  detailTitle: {
+    fontSize: ms(24),
+    fontFamily: fonts.secondary[700],
+    color: colors.text.primary,
+    marginEnd: ms(-24 - 16),
+  },
+});
