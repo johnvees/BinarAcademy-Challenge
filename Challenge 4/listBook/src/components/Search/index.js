@@ -25,9 +25,9 @@ const Search = () => {
           setPencarian(text);
         }}
       />
-        <TouchableOpacity style={styles.button}>
-          <Feather name="search" size={ms(24)} color={colors.white} />
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.button}>
+        <Feather name="search" size={ms(24)} color={colors.white} />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     borderRadius: ms(6),
     backgroundColor: colors.white,
     height: ms(36),
-    paddingStart: ms(16),
+    paddingHorizontal: ms(16),
     color: colors.text.primary,
     fontFamily: fonts.primary[400],
     fontSize: ms(12),
