@@ -4,14 +4,16 @@ import {ms} from 'react-native-size-matters';
 import axios from 'axios';
 import {useDispatch, useSelector} from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
 
 import Gap from '../Gap';
 import {BASE_URL, colors, fonts, idrCurrency, TEMP_TOKEN} from '../../utils';
 import {setRecommendedBook} from '../../screens/Home/redux/action';
-import {FlatList} from 'react-native-gesture-handler';
 
 const Recommended = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const {recommendedBook = []} = useSelector(state => state.home);
 
@@ -30,44 +32,53 @@ const Recommended = () => {
     getRecommendedBook();
   }, []);
 
-  const popularBookCard = ({item}) => {
+  const recommendedBookCard = ({item}) => {
     return (
       <View style={{marginEnd: ms(16)}}>
-        <Image source={{uri: `${item.cover_image}`}} style={styles.bookCover} />
-        <Gap height={ms(8)} />
-        <View style={{maxWidth: styles.bookCover.width}}>
-          <Text style={styles.bookTitle} ellipsizeMode="tail" numberOfLines={2}>
-            {item.title}
-          </Text>
-          <Gap height={ms(2)} />
-          <Text style={styles.bookAuthor}>{item.author}</Text>
-          <Text style={styles.bookPublisher}>{item.publisher}</Text>
-          <Gap height={ms(2)} />
-          <View>
-            <Text style={styles.bookPrice}>
-              {idrCurrency.format(`${item.price}`)}
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Detail', {id: `${item.id}`})}>
+          <Image
+            source={{uri: `${item.cover_image}`}}
+            style={styles.bookCover}
+          />
+          <Gap height={ms(8)} />
+          <View style={{maxWidth: styles.bookCover.width}}>
+            <Text
+              style={styles.bookTitle}
+              ellipsizeMode="tail"
+              numberOfLines={2}>
+              {item.title}
             </Text>
             <Gap height={ms(2)} />
-            <Text style={styles.bookRating}>
-              {item.average_rating} / 10{' '}
-              <FontAwesome name="star" size={ms(14)} color="gold" />
-            </Text>
+            <Text style={styles.bookAuthor}>{item.author}</Text>
+            <Text style={styles.bookPublisher}>{item.publisher}</Text>
+            <Gap height={ms(2)} />
+            <View>
+              <Text style={styles.bookPrice}>
+                {idrCurrency.format(`${item.price}`)}
+              </Text>
+              <Gap height={ms(2)} />
+              <Text style={styles.bookRating}>
+                {item.average_rating} / 10{' '}
+                <FontAwesome name="star" size={ms(14)} color="gold" />
+              </Text>
+            </View>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
     );
   };
 
   return (
     <View>
-      <Text style={styles.titleContent}>Recommended e-Book</Text>
+      <Text style={styles.titleContent}>Popular e-Book</Text>
       <Gap height={ms(16)} />
       <FlatList
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         data={recommendedBook}
         keyExtractor={item => item.id}
-        renderItem={popularBookCard}
+        renderItem={recommendedBookCard}
       />
     </View>
   );

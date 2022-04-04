@@ -5,17 +5,20 @@ import {ms} from 'react-native-size-matters';
 
 import {Gap, Header, Popular, Recommended, Search} from '../../components';
 import {colors} from '../../utils';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header type={'home'} title={'Discover'} />
-      <Gap height={ms(16)} />
-      <Search />
-      <Gap height={ms(24)} />
-      <Recommended />
-      <Gap height={ms(24)} />
-      <Popular />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Header type={'home'} title={'Discover'} />
+        <Gap height={ms(16)} />
+        <Search />
+        <Gap height={ms(24)} />
+        <Recommended />
+        <Gap height={ms(24)} />
+        <Popular />
+      </ScrollView>
     </SafeAreaView>
   );
 };
