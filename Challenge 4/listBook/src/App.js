@@ -1,10 +1,11 @@
 import {LogBox} from 'react-native';
-import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
-
 import ReactNativeSplashScreen from 'react-native-splash-screen';
-import {NavigationContainer} from '@react-navigation/native';
-import Routes from './routes';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/lib/integration/react';
+
+import {persistedStore, store} from './utils/store';
+import Root from './routes';
 
 const App = () => {
   useEffect(() => {
@@ -12,15 +13,16 @@ const App = () => {
   }, []);
 
   return (
-    <NavigationContainer>
-      <Routes />
-    </NavigationContainer>
+    <Provider store={store}>
+      <PersistGate persistor={persistedStore}>
+        <Root />
+      </PersistGate>
+    </Provider>
   );
 };
 
 export default App;
 
-const styles = StyleSheet.create({});
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
