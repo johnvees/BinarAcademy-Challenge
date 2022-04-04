@@ -3,9 +3,9 @@ import React, {useEffect} from 'react';
 import {ms} from 'react-native-size-matters';
 import axios from 'axios';
 import {useDispatch, useSelector} from 'react-redux';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import Gap from '../Gap';
-import {ILSampleCover} from '../../assets';
 import {BASE_URL, colors, fonts, idrCurrency, TEMP_TOKEN} from '../../utils';
 import {setRecommendedBook} from '../../screens/Home/redux/action';
 import {FlatList} from 'react-native-gesture-handler';
@@ -48,7 +48,10 @@ const Recommended = () => {
               {idrCurrency.format(`${item.price}`)}
             </Text>
             <Gap height={ms(2)} />
-            <Text style={styles.bookRating}>{item.average_rating}</Text>
+            <Text style={styles.bookRating}>
+              {item.average_rating} / 10{' '}
+              <FontAwesome name="star" size={ms(14)} color="gold" />
+            </Text>
           </View>
         </View>
       </View>
