@@ -7,6 +7,7 @@ import Share from 'react-native-share';
 
 import {colors, fonts} from '../../utils';
 import {Gap} from '../../components';
+import Button from '../Button';
 
 const Header = ({type, title, onPress}) => {
   const navigation = useNavigation();
@@ -25,9 +26,14 @@ const Header = ({type, title, onPress}) => {
 
   if (type === 'home') {
     return (
-      <View>
-        <Text style={styles.homeTitle}>{title}</Text>
-        <Text style={styles.homeDesc}>Search based on your needs</Text>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View>
+          <Text style={styles.homeTitle}>{title}</Text>
+          <Text style={styles.homeDesc}>Search based on your needs</Text>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', paddingStart: ms(32)}}>
+          <Button type={'fullButton'} title={'DONT PRESS!'} onPress={onPress} />
+        </View>
       </View>
     );
   } else if (type === 'detail') {

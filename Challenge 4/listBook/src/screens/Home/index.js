@@ -16,8 +16,9 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import {getRecommendedBookData} from './redux/action';
 import {setRefreshing} from '../../utils/store/globalAction';
+import {navigate} from '../../utils/helpers/navigate';
 
-const Home = () => {
+const Home = ({navigation}) => {
   const dispatch = useDispatch();
   const {tokenValue} = useSelector(state => state.login);
   const {refreshing} = useSelector(state => state.Global);
@@ -54,7 +55,11 @@ const Home = () => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        <Header type={'home'} title={'Discover'} />
+        <Header
+          type={'home'}
+          title={'Discover'}
+          onPress={() => navigate('Logout')}
+        />
         {/* <Gap height={ms(16)} /> */}
         {/* <Search /> */}
         <Gap height={ms(24)} />

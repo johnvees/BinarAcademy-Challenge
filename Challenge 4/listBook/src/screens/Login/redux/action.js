@@ -33,7 +33,7 @@ setLogin = payload => {
   };
 };
 
-setToken = payload => {
+export const setToken = payload => {
   return {
     type: 'SET_TOKEN',
     token: payload,
