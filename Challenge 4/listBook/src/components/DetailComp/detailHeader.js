@@ -1,16 +1,22 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
-
-import {ILSampleCover} from '../../assets';
+import {useDispatch, useSelector} from 'react-redux';
 import {ms} from 'react-native-size-matters';
-import Button from '../Button';
-import Gap from '../Gap';
-import {colors, fonts} from '../../utils';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
+import {Button, Gap} from '../../components';
+import {colors, fonts, idrCurrency} from '../../utils';
 
 const detailHeader = () => {
+
+  const {bookDetail = []} = useSelector(state => state.home);
+
   return (
     <View style={styles.container}>
-      <Image source={ILSampleCover} style={styles.bookCover} />
+      <Image
+        source={{uri: `${bookDetail.cover_image}`}}
+        style={styles.bookCover}
+      />
       <Gap width={ms(16)} />
       <View
         style={{
@@ -20,25 +26,35 @@ const detailHeader = () => {
           height: styles.bookCover.height,
         }}>
         <View>
-          <Text style={styles.bookTitle}>
-            Harry Potter and the Half-Blood Prince
-          </Text>
+          <Text style={styles.bookTitle}>{bookDetail.title}</Text>
           <Gap height={ms(16)} />
           <Text style={styles.bookInfo}>
-            Author By : <Text style={styles.bookDesc}>J. K. Rowling</Text>
+            Author By : <Text style={styles.bookDesc}>{bookDetail.author}</Text>
           </Text>
           <Gap height={ms(8)} />
           <Text style={styles.bookInfo}>
-            Publisher By : <Text style={styles.bookDesc}>Scholastic</Text>
+            Publisher By :{' '}
+            <Text style={styles.bookDesc}>{bookDetail.publisher}</Text>
           </Text>
           <Gap height={ms(16)} />
-          <Text style={styles.bookInfo}>Users Rating</Text>
+          <Text style={styles.bookInfo}>
+            Users Rating :{' '}
+            <Text style={styles.bookDesc}>
+              {bookDetail.average_rating} / 10{' '}
+              <FontAwesome name="star" size={ms(14)} color="gold" />
+            </Text>
+          </Text>
           <Gap height={ms(8)} />
           <Text style={styles.bookInfo}>
-            Total Sales : <Text style={styles.bookDesc}>268</Text>
+            Total Sales :{' '}
+            <Text style={styles.bookDesc}>{bookDetail.total_sale}</Text>
           </Text>
         </View>
-        <Button type={'fullButton'} title={'Buy Rp 630.000'} />
+
+        <Button
+          type={'fullButton'}
+          title={idrCurrency.format(`${bookDetail.price}`)}
+        />
       </View>
     </View>
   );

@@ -1,38 +1,30 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React, {useEffect} from 'react';
 import {ms} from 'react-native-size-matters';
-import axios from 'axios';
 import {useDispatch, useSelector} from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 
 import Gap from '../Gap';
-import {BASE_URL, colors, fonts, idrCurrency, TEMP_TOKEN} from '../../utils';
-import {setRecommendedBook} from '../../screens/Home/redux/action';
+import {colors, fonts, idrCurrency} from '../../utils';
+import {getPopularBookData} from '../../screens/Home/redux/action';
 
 const Recommended = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const {recommendedBook = []} = useSelector(state => state.home);
+  const {popularBook = []} = useSelector(state => state.home);
 
-  const getRecommendedBook = async () => {
-    const result = await axios.get(`${BASE_URL}`, {
-      headers: {Authorization: `Bearer ${TEMP_TOKEN}`},
-    });
-
-    if (result.status === 200) {
-      dispatch(setRecommendedBook(result.data.results));
-      console.log(result);
-    }
+  const getPopularBook = async () => {
+    dispatch(getPopularBookData()); // dispatch for fetch
   };
 
   useEffect(() => {
-    getRecommendedBook();
+    getPopularBook();
   }, []);
 
-  const recommendedBookCard = ({item}) => {
+  const popularBookCard = ({item}) => {
     return (
       <View style={{marginEnd: ms(16)}}>
         <TouchableOpacity
@@ -76,9 +68,9 @@ const Recommended = () => {
       <FlatList
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-        data={recommendedBook}
+        data={popularBook}
         keyExtractor={item => item.id}
-        renderItem={recommendedBookCard}
+        renderItem={popularBookCard}
       />
     </View>
   );

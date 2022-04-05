@@ -2,14 +2,16 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import React, {useEffect} from 'react';
 import {ms} from 'react-native-size-matters';
 import {useDispatch, useSelector} from 'react-redux';
-import axios from 'axios';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 
 import Gap from '../Gap';
-import {BASE_URL, colors, fonts, idrCurrency, TEMP_TOKEN} from '../../utils';
-import {setRecommendedBook} from '../../screens/Home/redux/action';
+import {colors, fonts, idrCurrency} from '../../utils';
+import {
+  getDetailBookById,
+  getRecommendedBookData,
+} from '../../screens/Home/redux/action';
 
 const Popular = () => {
   const dispatch = useDispatch();
@@ -17,26 +19,22 @@ const Popular = () => {
 
   const {recommendedBook = []} = useSelector(state => state.home);
 
-  const getPopularBook = async () => {
-    const result = await axios.get(`${BASE_URL}`, {
-      headers: {Authorization: `Bearer ${TEMP_TOKEN}`},
-    });
+  const getRecommendedBook = () => {
+    dispatch(getRecommendedBookData());
+  };
 
-    if (result.status === 200) {
-      dispatch(setRecommendedBook(result.data.results));
-      console.log(result);
-    }
+  const getBookDetails = item => {
+    dispatch(getDetailBookById(item.id));
   };
 
   useEffect(() => {
-    getPopularBook();
+    getRecommendedBook();
   }, []);
 
-  const popularBookCard = ({item}) => {
+  const recommendedBookCard = ({item}) => {
     return (
       <View style={{marginEnd: ms(10), marginBottom: ms(16)}}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Detail', {id: `${item.id}`})}>
+        <TouchableOpacity onPress={() => getBookDetails(item)}>
           <Image
             source={{uri: `${item.cover_image}`}}
             style={styles.bookCover}
@@ -83,7 +81,7 @@ const Popular = () => {
           })
           .slice(0, 6)}
         keyExtractor={item => item.id}
-        renderItem={popularBookCard}
+        renderItem={recommendedBookCard}
       />
     </View>
   );

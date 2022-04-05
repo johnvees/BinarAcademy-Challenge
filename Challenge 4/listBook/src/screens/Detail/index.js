@@ -12,7 +12,7 @@ const Detail = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Header type={'detail'} title={'Movie Detail'} />
+        <Header type={'detail'} title={'Book Detail'} />
         <Gap height={ms(24)} />
         <DetailHeader />
         <Gap height={ms(24)} />

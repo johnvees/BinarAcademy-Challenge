@@ -1,5 +1,7 @@
 const initialState = {
   recommendedBook: [],
+  popularBook: [],
+  bookDetail: [],
 };
 
 const HomeReducer = (state = initialState, action) => {
@@ -9,11 +11,19 @@ const HomeReducer = (state = initialState, action) => {
         ...state,
         recommendedBook: action.dataRecommended,
       };
-
-    default:
+    case 'SET_POPULAR_BOOK':
       return {
         ...state,
+        popularBook: action.dataPopular,
       };
+    case 'SET_DETAIL_BOOK':
+      return {
+        ...state,
+        bookDetail: action.dataDetailBook,
+      };
+
+    default:
+      return state;
   }
 };
 
