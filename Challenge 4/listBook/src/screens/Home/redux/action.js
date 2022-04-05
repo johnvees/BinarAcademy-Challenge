@@ -1,8 +1,11 @@
 import axios from 'axios';
 import {BASE_URL, TEMP_TOKEN} from '../../../utils';
 import {navigate} from '../../../utils/helpers/navigate';
+import {store} from '../../../utils/store';
 
-axios.defaults.headers.Authorization = `Bearer ${TEMP_TOKEN}`;
+const token = store.getState().login.tokenValue;
+
+axios.defaults.headers.Authorization = `Bearer ${token}`;
 
 export const getRecommendedBookData = () => async dispatch => {
   try {

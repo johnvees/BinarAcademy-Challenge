@@ -1,15 +1,54 @@
 import {StyleSheet, Text, View, Image, TextInput} from 'react-native';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useDispatch, useSelector} from 'react-redux';
+import axios from 'axios';
 
 import {colors, fonts} from '../../utils';
 import {ILLogo} from '../../assets';
 import {Button, Gap} from '../../components';
 import {ms} from 'react-native-size-matters';
+import {BASE_AUTH} from '../../utils/helpers';
+import {postLoginAction} from '../Login/redux/action';
 
 const Login = ({navigation}) => {
-  const [username, setUsername] = useState('');
+  const dispatch = useDispatch();
+  const {token} = useSelector(state => state.login);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  // const postLogin = async () => {
+  //   try {
+  //     const body = {
+  //       email: email, // mor_2314
+  //       password: password, // 83r5^_
+  //     };
+
+  //     const results = await axios.post(`${BASE_AUTH}/login`, body);
+
+  //     if (results.status === 201 || results.status === 200) {
+  //       navigation.replace('Home');
+  //       console.log(results.data.tokens.access.token);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     if (username === '') {
+  //       Alert.alert('Gagal', 'Username Harus diisi');
+  //     } else if (password === '') {
+  //       Alert.alert('Gagal', 'Password Harus diisi');
+  //     } else {
+  //       Alert.alert('Gagal', 'Username dan Password Tidak Ada');
+  //     }
+  //   }
+  // };
+
+  const postLogin = () => {
+    const body = {
+      email: email,
+      password: password,
+    };
+    dispatch(postLoginAction(body, token));
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -22,7 +61,7 @@ const Login = ({navigation}) => {
         placeholderTextColor={colors.text.primary}
         selectionColor={colors.button.background}
         onChangeText={text => {
-          setUsername(text);
+          setEmail(text);
         }}
       />
       <TextInput
@@ -36,7 +75,7 @@ const Login = ({navigation}) => {
         }}
       />
       <Gap height={16} />
-      <Button type={'fullButton'} title={'Login'} />
+      <Button type={'fullButton'} title={'Login'} onPress={postLogin} />
       <View
         style={{
           flex: 1,
