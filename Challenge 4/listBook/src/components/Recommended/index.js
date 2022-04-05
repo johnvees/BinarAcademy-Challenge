@@ -1,10 +1,9 @@
-import {StyleSheet, Text, View, Image, RefreshControl} from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 import React, {useEffect} from 'react';
 import {ms} from 'react-native-size-matters';
 import {useDispatch, useSelector} from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
-import {useNavigation} from '@react-navigation/native';
 
 import Gap from '../Gap';
 import {colors, fonts, idrCurrency} from '../../utils';
@@ -12,23 +11,14 @@ import {
   getDetailBookById,
   getPopularBookData,
 } from '../../screens/Home/redux/action';
-import {setRefreshing} from '../../utils/store/globalAction';
 
 const Recommended = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
 
   const {popularBook = []} = useSelector(state => state.home);
-  const {refreshing} = useSelector(state => state.Global);
-
-  const onRefresh = () => {
-    dispatch(setRefreshing(true));
-  };
 
   const getPopularBook = async () => {
     dispatch(getPopularBookData()); // dispatch for fetch
-    dispatch(setRefreshing(false));
-
   };
 
   const getBookDetails = item => {
@@ -80,9 +70,6 @@ const Recommended = () => {
       <Text style={styles.titleContent}>Popular e-Book</Text>
       <Gap height={ms(16)} />
       <FlatList
-        refreshControl={
-          <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
-        }
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         data={popularBook}

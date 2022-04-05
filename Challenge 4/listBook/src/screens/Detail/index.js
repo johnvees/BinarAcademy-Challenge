@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, RefreshControl} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ms} from 'react-native-size-matters';
@@ -7,11 +7,29 @@ import {colors} from '../../utils';
 import {Gap, Header, Popular} from '../../components';
 import {DetailHeader, DetailOverview} from '../../components/DetailComp';
 import {ScrollView} from 'react-native-gesture-handler';
+import {setRefreshing} from '../../utils/store/globalAction';
+import {useDispatch, useSelector} from 'react-redux';
+import {getRecommendedBookData} from '../Home/redux/action';
 
 const Detail = () => {
+  const dispatch = useDispatch();
+  const {loading, refreshing} = useSelector(state => state.Global);
+
+  const getBookData = () => {
+    dispatch(getRecommendedBookData());
+  };
+  const onRefresh = () => {
+    setRefreshing(true);
+    getBookData();
+    setRefreshing(false);
+  };
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={true}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <Header type={'detail'} title={'Book Detail'} />
         <Gap height={ms(24)} />
         <DetailHeader />

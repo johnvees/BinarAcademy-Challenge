@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, RefreshControl} from 'react-native';
 import React, {useEffect} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ms} from 'react-native-size-matters';
@@ -8,11 +8,12 @@ import {colors} from '../../utils';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import {getRecommendedBookData} from './redux/action';
+import {setRefreshing} from '../../utils/store/globalAction';
 
 const Home = () => {
   const dispatch = useDispatch();
   const {tokenValue} = useSelector(state => state.login);
-  const {loading} = useSelector(state => state.Global);
+  const {loading, refreshing} = useSelector(state => state.Global);
 
   useEffect(() => {
     getBookData();
@@ -22,9 +23,19 @@ const Home = () => {
     dispatch(getRecommendedBookData());
   };
 
+  const onRefresh = () => {
+    setRefreshing(true);
+    getBookData();
+    setRefreshing(false);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <Header type={'home'} title={'Discover'} />
         {/* <Gap height={ms(16)} /> */}
         {/* <Search /> */}
