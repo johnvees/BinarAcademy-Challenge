@@ -4,7 +4,6 @@ import {ms} from 'react-native-size-matters';
 import {useDispatch, useSelector} from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
-import {useNavigation} from '@react-navigation/native';
 
 import Gap from '../Gap';
 import {colors, fonts, idrCurrency} from '../../utils';
@@ -15,7 +14,6 @@ import {
 
 const Popular = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
 
   const {recommendedBook = []} = useSelector(state => state.home);
 

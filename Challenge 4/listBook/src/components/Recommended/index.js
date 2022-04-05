@@ -8,7 +8,10 @@ import {useNavigation} from '@react-navigation/native';
 
 import Gap from '../Gap';
 import {colors, fonts, idrCurrency} from '../../utils';
-import {getPopularBookData} from '../../screens/Home/redux/action';
+import {
+  getDetailBookById,
+  getPopularBookData,
+} from '../../screens/Home/redux/action';
 
 const Recommended = () => {
   const dispatch = useDispatch();
@@ -20,6 +23,10 @@ const Recommended = () => {
     dispatch(getPopularBookData()); // dispatch for fetch
   };
 
+  const getBookDetails = item => {
+    dispatch(getDetailBookById(item.id));
+  };
+
   useEffect(() => {
     getPopularBook();
   }, []);
@@ -27,8 +34,7 @@ const Recommended = () => {
   const popularBookCard = ({item}) => {
     return (
       <View style={{marginEnd: ms(16)}}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Detail', {id: `${item.id}`})}>
+        <TouchableOpacity onPress={() => getBookDetails(item)}>
           <Image
             source={{uri: `${item.cover_image}`}}
             style={styles.bookCover}
