@@ -1,5 +1,6 @@
 const initialState = {
   loading: false,
+  refreshing: false
 };
 
 const Global = (state = initialState, action) => {
@@ -8,6 +9,11 @@ const Global = (state = initialState, action) => {
       return {
         ...state,
         loading: action.status,
+      };
+    case 'SET_REFRESHING':
+      return {
+        ...state,
+        refreshing: action.refresh,
       };
     default:
       return state;

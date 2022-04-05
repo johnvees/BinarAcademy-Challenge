@@ -4,3 +4,10 @@ export const setLoading = status => {
     status,
   };
 };
+
+export const setRefreshing = refresh => {
+  return {
+    type: 'SET_REFRESHING',
+    refresh,
+  };
+};

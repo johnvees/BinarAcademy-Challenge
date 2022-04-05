@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, RefreshControl} from 'react-native';
 import React, {useEffect} from 'react';
 import {ms} from 'react-native-size-matters';
 import {useDispatch, useSelector} from 'react-redux';
@@ -11,11 +11,17 @@ import {
   getDetailBookById,
   getRecommendedBookData,
 } from '../../screens/Home/redux/action';
+import { setRefreshing } from '../../utils/store/globalAction';
 
 const Popular = () => {
   const dispatch = useDispatch();
 
   const {recommendedBook = []} = useSelector(state => state.home);
+  const {refreshing} = useSelector(state => state.Global);
+
+  const onRefresh = () => {
+    dispatch(setRefreshing(true));
+  };
 
   const getRecommendedBook = () => {
     dispatch(getRecommendedBookData());
@@ -70,8 +76,10 @@ const Popular = () => {
       <Text style={styles.titleContent}>Recommended e-Book</Text>
       <Gap height={ms(16)} />
       <FlatList
+        refreshControl={
+          <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
+        }
         showsVerticalScrollIndicator={false}
-        scrollEnabled={false}
         numColumns={3}
         data={recommendedBook
           .sort((a, b) => {

@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View, Image, TextInput, Alert} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -7,11 +7,14 @@ import {colors, fonts} from '../../utils';
 import {ILLogo} from '../../assets';
 import {Button, Gap} from '../../components';
 import {ms} from 'react-native-size-matters';
-import { postLoginAction } from './redux/action';
+import {postLoginAction} from './redux/action';
+import {setRefreshing} from '../../utils/store/globalAction';
 
 const Login = ({navigation}) => {
   const dispatch = useDispatch();
-  const {token} = useSelector(state => state.login);
+  const {tokenValue} = useSelector(state => state.login);
+  const {refreshing} = useSelector(state => state.Global);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -27,9 +30,22 @@ const Login = ({navigation}) => {
         email: email,
         password: password,
       };
-      dispatch(postLoginAction(body, token));
+      dispatch(postLoginAction(body, tokenValue));
     }
   };
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  };
+
+  useEffect(() => {
+    if (tokenValue) {
+      navigation.navigate('Home');
+    }
+  }, [tokenValue]);
 
   return (
     <SafeAreaView style={styles.container}>

@@ -3,6 +3,7 @@ import {Alert} from 'react-native';
 
 import {BASE_AUTH} from '../../../utils';
 import {navigate} from '../../../utils/helpers/navigate';
+import {setLoading} from '../../../utils/store/globalAction';
 
 export const postLoginAction = data => async dispatch => {
   try {
@@ -18,6 +19,8 @@ export const postLoginAction = data => async dispatch => {
   } catch (error) {
     Alert.alert('Error', 'Email and Password Not Found');
     console.log(error);
+  } finally {
+    dispatch(setLoading(false));
   }
 };
 

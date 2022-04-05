@@ -3,12 +3,25 @@ import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import {ms} from 'react-native-size-matters';
 import {useNavigation} from '@react-navigation/native';
+import Share from 'react-native-share';
 
 import {colors, fonts} from '../../utils';
 import {Gap} from '../../components';
 
 const Header = ({type, title}) => {
   const navigation = useNavigation();
+
+  const customShare = async () => {
+    const shareOptions = {
+      message: 'This is a test share massage',
+    };
+
+    try {
+      const ShareResponse = await Share.open(shareOptions);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (type === 'home') {
     return (
@@ -33,7 +46,7 @@ const Header = ({type, title}) => {
             <Feather name="heart" size={ms(24)} color={colors.text.primary} />
           </TouchableOpacity>
           <Gap width={ms(16)} />
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <TouchableOpacity onPress={customShare}>
             <Feather name="share-2" size={ms(24)} color={colors.text.primary} />
           </TouchableOpacity>
         </View>
