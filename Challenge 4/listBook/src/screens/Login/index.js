@@ -7,7 +7,7 @@ import {colors, fonts} from '../../utils';
 import {ILLogo} from '../../assets';
 import {Button, Gap} from '../../components';
 import {ms} from 'react-native-size-matters';
-import {postLoginAction} from '../Login/redux/action';
+import { postLoginAction } from './redux/action';
 
 const Login = ({navigation}) => {
   const dispatch = useDispatch();

@@ -1,16 +1,48 @@
-import {StyleSheet, Text, View, Image, TextInput} from 'react-native';
+import {StyleSheet, Text, View, Image, TextInput, Alert} from 'react-native';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {ms} from 'react-native-size-matters';
+import {useDispatch} from 'react-redux';
 
 import {colors, fonts} from '../../utils';
 import {ILLogo} from '../../assets';
 import {Button, Gap} from '../../components';
-import {ms} from 'react-native-size-matters';
+import { postRegisterAction } from './redux/action';
 
-const Login = ({navigation}) => {
-  const [fullName, setFullname] = useState('');
+let regexPass = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
+let regexEmail = new RegExp('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$');
+
+const Register = ({navigation}) => {
+  const dispatch = useDispatch();
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const resultRegexPass = regexPass.test(password);
+  const resultRegexEmail = regexEmail.test(email);
+
+  const postRegister = () => {
+    if (name.length === 0 && email.length === 0 && password.length === 0) {
+      Alert.alert('Error', 'Form is empty');
+    } else if (resultRegexEmail === false) {
+      Alert.alert('Error', 'Email Does Not Match The Format');
+    } else if (resultRegexPass === false) {
+      Alert.alert('Error', 'Password Does Not Match The Format');
+    } else if (name.length === 0) {
+      Alert.alert('Error', 'Name is Empty');
+    } else if (email.length === 0) {
+      Alert.alert('Error', 'Email is Empty');
+    } else if (password.length === 0) {
+      Alert.alert('Error', 'Password is Empty');
+    } else {
+      const body = {
+        email: email,
+        password: password,
+        name: name,
+      };
+      dispatch(postRegisterAction(body));
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -20,11 +52,11 @@ const Login = ({navigation}) => {
       <Text style={styles.titleDesc}>Create Your Account Below!</Text>
       <TextInput
         style={styles.textInput}
-        placeholder="Full Name"
+        placeholder="Name"
         placeholderTextColor={colors.text.primary}
         selectionColor={colors.button.background}
         onChangeText={text => {
-          setFullname(text);
+          setName(text);
         }}
       />
       <TextInput
@@ -47,14 +79,14 @@ const Login = ({navigation}) => {
         }}
       />
       <Gap height={16} />
-      <Button type={'fullButton'} title={'Register'} />
+      <Button type={'fullButton'} title={'Register'} onPress={postRegister} />
       <View
         style={{
           flex: 1,
           justifyContent: 'flex-end',
         }}>
         <Button
-          onPress={() => navigation.navigate('Successful')}
+          onPress={() => navigation.navigate('Login')}
           type={'textOnly'}
           secondaryTitle={`Already Have an Account?`}
           primaryTitle={' Login Here'}
@@ -65,7 +97,7 @@ const Login = ({navigation}) => {
   );
 };
 
-export default Login;
+export default Register;
 
 const styles = StyleSheet.create({
   container: {
