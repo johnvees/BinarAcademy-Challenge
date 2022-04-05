@@ -1,4 +1,6 @@
 import axios from 'axios';
+import {Alert} from 'react-native';
+
 import {BASE_AUTH} from '../../../utils';
 import {navigate} from '../../../utils/helpers/navigate';
 
@@ -14,6 +16,7 @@ export const postLoginAction = data => async dispatch => {
       navigate('Home');
     }
   } catch (error) {
+    Alert.alert('Error', 'Email and Password Not Found');
     console.log(error);
   }
 };
