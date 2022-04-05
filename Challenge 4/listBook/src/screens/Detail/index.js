@@ -2,6 +2,7 @@ import {StyleSheet, Text, View, RefreshControl} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ms} from 'react-native-size-matters';
+import {Notification} from '../../components';
 
 import {colors} from '../../utils';
 import {Gap, Header, Popular, Skeleton} from '../../components';
@@ -32,6 +33,11 @@ const Detail = ({skel}) => {
   //   );
   // }
 
+  const testPushNotification = () => {
+    Notification.configure();
+    Notification.buatChannel("1");
+    Notification.kirimNotification("1", "Judul", "Isi");
+  };
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -39,7 +45,11 @@ const Detail = ({skel}) => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        <Header type={'detail'} title={'Book Detail'} />
+        <Header
+          type={'detail'}
+          title={'Book Detail'}
+          onPress={testPushNotification}
+        />
         <Gap height={ms(24)} />
         <DetailHeader />
         <Gap height={ms(24)} />

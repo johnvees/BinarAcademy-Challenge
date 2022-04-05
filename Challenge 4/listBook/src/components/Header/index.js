@@ -8,7 +8,7 @@ import Share from 'react-native-share';
 import {colors, fonts} from '../../utils';
 import {Gap} from '../../components';
 
-const Header = ({type, title}) => {
+const Header = ({type, title, onPress}) => {
   const navigation = useNavigation();
 
   const customShare = async () => {
@@ -42,7 +42,7 @@ const Header = ({type, title}) => {
         </TouchableOpacity>
         <Text style={styles.detailTitle}>{title}</Text>
         <View style={{flexDirection: 'row'}}>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <TouchableOpacity onPress={onPress}>
             <Feather name="heart" size={ms(24)} color={colors.text.primary} />
           </TouchableOpacity>
           <Gap width={ms(16)} />
