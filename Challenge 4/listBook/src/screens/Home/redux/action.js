@@ -2,6 +2,7 @@ import axios from 'axios';
 import {BASE_URL, TEMP_TOKEN} from '../../../utils';
 import {navigate} from '../../../utils/helpers/navigate';
 import {store} from '../../../utils/store';
+import {setLoading} from '../../../utils/store/globalAction';
 
 const token = store.getState().login.tokenValue;
 
@@ -9,6 +10,7 @@ axios.defaults.headers.Authorization = `Bearer ${token}`;
 
 export const getRecommendedBookData = () => async dispatch => {
   try {
+    dispatch(setLoading(true));
     const result = await axios.get(`${BASE_URL}`);
 
     if (result.status === 200) {
@@ -17,11 +19,15 @@ export const getRecommendedBookData = () => async dispatch => {
     }
   } catch (error) {
     console.log(error);
+  } finally {
+    dispatch(setLoading(false));
   }
 };
 
 export const getPopularBookData = () => async dispatch => {
   try {
+    dispatch(setLoading(true));
+
     const result = await axios.get(`${BASE_URL}`);
 
     if (result.status === 200) {
@@ -30,12 +36,15 @@ export const getPopularBookData = () => async dispatch => {
     }
   } catch (error) {
     console.log(error);
+  } finally {
+    dispatch(setLoading(false));
   }
 };
 
 export const getDetailBookById = id => async dispatch => {
   try {
-    console.log(id);
+    dispatch(setLoading(true));
+    // console.log(id);
     const result = await axios.get(`${BASE_URL}/${id}`);
 
     if (result.status === 200) {
@@ -45,6 +54,8 @@ export const getDetailBookById = id => async dispatch => {
     }
   } catch (error) {
     console.log(error);
+  } finally {
+    dispatch(setLoading(false));
   }
 };
 

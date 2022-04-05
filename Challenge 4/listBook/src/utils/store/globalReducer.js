@@ -1,6 +1,6 @@
 const initialState = {
   loading: false,
-  refreshing: false
+  refreshing: false,
 };
 
 const Global = (state = initialState, action) => {

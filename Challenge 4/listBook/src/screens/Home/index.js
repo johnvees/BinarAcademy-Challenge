@@ -1,9 +1,16 @@
 import {StyleSheet, Text, View, RefreshControl} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ms} from 'react-native-size-matters';
 
-import {Gap, Header, Popular, Recommended, Search} from '../../components';
+import {
+  Gap,
+  Header,
+  Popular,
+  Recommended,
+  Search,
+  Skeleton,
+} from '../../components';
 import {colors} from '../../utils';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
@@ -13,13 +20,16 @@ import {setRefreshing} from '../../utils/store/globalAction';
 const Home = () => {
   const dispatch = useDispatch();
   const {tokenValue} = useSelector(state => state.login);
-  const {loading, refreshing} = useSelector(state => state.Global);
+  const {refreshing} = useSelector(state => state.Global);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getBookData();
   }, [tokenValue]);
 
   const getBookData = () => {
+    setLoading(false);
+
     dispatch(getRecommendedBookData());
   };
 
@@ -28,6 +38,14 @@ const Home = () => {
     getBookData();
     setRefreshing(false);
   };
+
+  if (loading) {
+    return (
+      <View>
+        <Skeleton skel={'home'} />
+      </View>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container}>

@@ -4,14 +4,14 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {ms} from 'react-native-size-matters';
 
 import {colors} from '../../utils';
-import {Gap, Header, Popular} from '../../components';
+import {Gap, Header, Popular, Skeleton} from '../../components';
 import {DetailHeader, DetailOverview} from '../../components/DetailComp';
 import {ScrollView} from 'react-native-gesture-handler';
 import {setRefreshing} from '../../utils/store/globalAction';
 import {useDispatch, useSelector} from 'react-redux';
 import {getRecommendedBookData} from '../Home/redux/action';
 
-const Detail = () => {
+const Detail = ({skel}) => {
   const dispatch = useDispatch();
   const {loading, refreshing} = useSelector(state => state.Global);
 
@@ -23,10 +23,19 @@ const Detail = () => {
     getBookData();
     setRefreshing(false);
   };
+
+  // if (loading) {
+  //   return (
+  //     <View>
+  //       <Skeleton skel={'detail'} />
+  //     </View>
+  //   );
+  // }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
-        showsVerticalScrollIndicator={true}
+        showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>

@@ -7,6 +7,8 @@ import {setLoading} from '../../../utils/store/globalAction';
 
 export const postLoginAction = data => async dispatch => {
   try {
+    dispatch(setLoading(true));
+
     const result = await axios.post(`${BASE_AUTH}/login`, data);
 
     if (result.status === 200) {
