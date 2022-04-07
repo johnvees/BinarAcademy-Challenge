@@ -8,12 +8,10 @@ import {ILLogo} from '../../assets';
 import {Button, Gap} from '../../components';
 import {ms} from 'react-native-size-matters';
 import {postLoginAction} from './redux/action';
-import {setRefreshing} from '../../utils/store/globalAction';
 
 const Login = ({navigation}) => {
   const dispatch = useDispatch();
   const {tokenValue} = useSelector(state => state.login);
-  const {refreshing} = useSelector(state => state.Global);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -32,13 +30,6 @@ const Login = ({navigation}) => {
       };
       dispatch(postLoginAction(body, tokenValue));
     }
-  };
-
-  const onRefresh = () => {
-    setRefreshing(true);
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 2000);
   };
 
   useEffect(() => {

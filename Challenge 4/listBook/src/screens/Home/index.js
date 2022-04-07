@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, RefreshControl} from 'react-native';
+import {StyleSheet, View, RefreshControl} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ms} from 'react-native-size-matters';
@@ -18,7 +18,7 @@ import {getRecommendedBookData} from './redux/action';
 import {setRefreshing} from '../../utils/store/globalAction';
 import {navigate} from '../../utils/helpers/navigate';
 
-const Home = ({navigation}) => {
+const Home = () => {
   const dispatch = useDispatch();
   const {tokenValue} = useSelector(state => state.login);
   const {refreshing} = useSelector(state => state.Global);

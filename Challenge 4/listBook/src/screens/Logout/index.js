@@ -1,11 +1,11 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleShee, View} from 'react-native';
 import React from 'react';
 import {Button} from '../../components';
 import {navigate} from '../../utils/helpers/navigate';
 import {setToken} from '../Login/redux/action';
 import {useDispatch} from 'react-redux';
 
-const Logout = ({type, title, onPress}) => {
+const Logout = () => {
   const dispatch = useDispatch();
 
   const logout = () => {

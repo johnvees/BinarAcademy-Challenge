@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, RefreshControl} from 'react-native';
+import {StyleSheet, RefreshControl} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ms} from 'react-native-size-matters';

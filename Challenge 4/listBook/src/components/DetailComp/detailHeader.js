@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {ms} from 'react-native-size-matters';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
