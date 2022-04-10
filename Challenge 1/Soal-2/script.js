@@ -23,3 +23,5 @@ console.log(checkTypeNumber('3')); // Output yang keluar => "Error: Invalid data
 console.log(checkTypeNumber({})); // Output yang keluar => "Error: Invalid data type"
 console.log(checkTypeNumber([])); // Output yang keluar => "Error: Invalid data type"
 console.log(checkTypeNumber()); // Output yang keluar => "Error: Bro where is the parameter"
+
+module.exports = checkTypeNumber;

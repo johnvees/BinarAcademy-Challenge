@@ -68,3 +68,5 @@ console.log(getSplitName(0));
 console.log(getSplitName(1));
 // EXPECTED OUTPUT
 // Error : 0 bukanlah sebuah string
+
+module.exports = getSplitName;

@@ -1,4 +1,4 @@
-console.log("Chapter 1 Challenge Number 6");
+console.log('Chapter 1 Challenge Number 6');
 
 const getAngkaTerbesarKedua = (dataAngka) => {
   const iniArrayLo = Array.isArray(dataAngka);
@@ -11,7 +11,7 @@ const getAngkaTerbesarKedua = (dataAngka) => {
     })[1];
     return secondLargestNumber;
   } else {
-    return "Error";
+    return 'Error';
   }
 };
 
@@ -24,11 +24,13 @@ console.log(getAngkaTerbesarKedua(dataAngka));
 // 8
 
 console.log(
-  getAngkaTerbesarKedua(0) + " : bukan merupakan sebuah nilai atau deret angka"
+  getAngkaTerbesarKedua(0) + ' : bukan merupakan sebuah nilai atau deret angka'
 );
 // EXPECTED OUTPUT:
 // "ERROR : bukan merupakan sebuah nilai atau deret angka"
 
-console.log(getAngkaTerbesarKedua() + " : Tidak memiliki parameter");
+console.log(getAngkaTerbesarKedua() + ' : Tidak memiliki parameter');
 // EXPECTED OUTPUT:
 // "ERROR : Tidak memiliki parameter"
+
+module.exports = getAngkaTerbesarKedua;

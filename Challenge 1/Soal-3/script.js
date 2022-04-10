@@ -12,9 +12,9 @@ const checkEmail = (email) => {
       return 'INVALID';
     }
   } else if (typeof email === 'number') {
-    return 'Bukan merupakan sebuah string'
+    return 'Bukan merupakan sebuah string';
   } else {
-    return "Tidak memiliki parameter"
+    return 'Tidak memiliki parameter';
   }
 };
 
@@ -26,3 +26,5 @@ console.log(checkEmail('apranata@binar.')); // Output yang keluar => "INVALID"
 console.log(checkEmail('apranata')); // Output yang keluar => "general format email berupa (something)@(some_domain).(some_toplevel_domain)"
 console.log(checkEmail(3322)); // Output yang keluar => "Bukan merupakan sebuah string"
 console.log(checkEmail()); // Output yang keluar => "Tidak memiliki parameter"
+
+module.exports = checkEmail;

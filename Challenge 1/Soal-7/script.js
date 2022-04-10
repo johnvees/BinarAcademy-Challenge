@@ -43,3 +43,5 @@ const dataPenjualanPakAldi = [
 ];
 
 console.log(getTotalPenjualan(dataPenjualanPakAldi));
+
+module.exports = getTotalPenjualan;
